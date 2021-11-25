@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Images/Sprites/HeroSprite/Animation/HeroAnimation.tres" type="SpriteFrames" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Hero" type="KinematicBody2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "Run"
+frame = 1
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
