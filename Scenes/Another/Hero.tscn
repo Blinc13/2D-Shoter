@@ -16,5 +16,5 @@ frames = ExtResource( 1 )
 animation = "Run"
 playing = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
