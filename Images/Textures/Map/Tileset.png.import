@@ -2,25 +2,27 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tileset.png-c39f251f7509eb22967057c42f47e196.stex"
+path.s3tc="res://.import/Tileset.png-c39f251f7509eb22967057c42f47e196.s3tc.stex"
+path.etc2="res://.import/Tileset.png-c39f251f7509eb22967057c42f47e196.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Images/Textures/Map/Tileset.png"
-dest_files=[ "res://.import/Tileset.png-c39f251f7509eb22967057c42f47e196.stex" ]
+dest_files=[ "res://.import/Tileset.png-c39f251f7509eb22967057c42f47e196.s3tc.stex", "res://.import/Tileset.png-c39f251f7509eb22967057c42f47e196.etc2.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -32,4 +34,4 @@ process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true
-svg/scale=1.0
+svg/scale=0.001
