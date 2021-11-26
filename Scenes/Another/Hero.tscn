@@ -4,6 +4,7 @@
 [ext_resource path="res://Scripts/Objects/Hero.gd" type="Script" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.47193, 8.2767 )
 
 [node name="Hero" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -14,7 +15,9 @@ current = true
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "Run"
-playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2( -0.528283, -1.31482 )
+rotation = -3.14159
+scale = Vector2( 1.00754, -0.762963 )
 shape = SubResource( 1 )

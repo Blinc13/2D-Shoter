@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Load/BetaLevel.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Images/Textures/Map/Data/MapTiles.tres" type="TileSet" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 738.5, 10 )
@@ -11,6 +12,12 @@ extents = Vector2( 12.5, 336.5 )
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 3 )
+cell_size = Vector2( 16, 16 )
+format = 1
+tile_data = PoolIntArray( -262144, 15, 0, -262143, 15, 0, -262142, 15, 0, -262141, 15, 0, -262140, 15, 0, -131078, 15, 0, -131077, 15, 0, -131076, 15, 0, -131075, 15, 0, -131074, 15, 0, -131073, 15, 0, -196608, 15, 0, -196607, 1, 0, -196604, 15, 0, -196603, 15, 0, -65542, 15, 0, -65541, 0, 0, -65539, 0, 0, -65537, 0, 0, -131068, 15, 0, -131067, 15, 0, -6, 15, 0, -65532, 15, 0, -65531, 15, 0, -65530, 15, 0, 65530, 15, 0, 65531, 0, 0, 65533, 0, 0, 65535, 0, 0, 1, 0, 0, 3, 1, 0, 6, 15, 0, 131066, 15, 0, 65542, 15, 0, 196602, 15, 0, 196603, 15, 0, 196604, 15, 0, 196605, 15, 0, 196606, 15, 0, 196607, 15, 0, 131072, 15, 0, 131073, 15, 0, 131074, 15, 0, 131078, 15, 0, 196610, 15, 0, 196611, 15, 0, 196612, 15, 0, 196613, 15, 0, 196614, 15, 0 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2( 0, -330 )
