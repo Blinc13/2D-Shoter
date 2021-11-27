@@ -5,7 +5,6 @@
 
 [sub_resource type="PhysicsMaterial" id=2]
 friction = 0.8
-bounce = 0.01
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 1, 1 )
