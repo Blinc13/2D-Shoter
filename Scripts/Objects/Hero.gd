@@ -5,8 +5,8 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 
-const speed=200
-const relTime=0.1
+const speed=150
+const relTime=0.2
 var velocity: Vector2
 var firePos: Vector2
 var reload=relTime
@@ -34,7 +34,10 @@ func _process(delta):
 	
 	if Input.is_action_pressed("Fire") and reload>=relTime:
 		reload=0
-		print_debug("А ну заткнись, этого нет, бюджет - 1 пачка дошика")
+		var node=load("res://Scenes/Weapons/Bullet.tscn").instance()
+		node.start(Vector2(500,0),position)
+		get_parent().add_child(node)
+		print("fire")
 	
 	if velocity.length() == 0:
 		$AnimatedSprite.playing=false
