@@ -8,7 +8,7 @@ extends KinematicBody2D
 var Bullet=preload("res://Scenes/Weapons/Bullet.tscn")
 
 const speed=150
-const relTime=0.1
+const relTime=0.2
 var velocity: Vector2
 var firePos: Vector2
 var reload=relTime

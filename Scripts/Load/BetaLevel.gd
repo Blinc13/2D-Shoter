@@ -11,10 +11,10 @@ func _ready():
 	var node=preload("res://Scenes/Another/Hero.tscn").instance()
 	var nod=preload("res://Scenes/Another/GameUi.tscn").instance()
 	nod.init(node)
-	#nod.set_size(get_viewport_rect().size)
 	add_child(node)
 	node.add_child(nod)
-	#nod.set_position(Vector2(-get_viewport_rect().size.x/2,-get_viewport_rect().size.y/2))
+	
+	$Line2D.points=$Nav.get_simple_path(node.position,Vector2(85,-100))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

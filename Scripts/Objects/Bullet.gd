@@ -19,4 +19,4 @@ func start(point:Vector2,pos:Vector2):
 #	pass
 
 func _physics_process(delta):
-	linear_velocity-=linear_velocity*windage
+	linear_velocity-=linear_velocity*windage*delta

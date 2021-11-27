@@ -5,7 +5,7 @@
 [ext_resource path="res://icon.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 7.47193, 8.2767 )
+extents = Vector2( 5.9551, 7.86408 )
 
 [node name="Hero" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -19,7 +19,7 @@ frames = ExtResource( 1 )
 animation = "Run"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( -0.528283, -1.31482 )
+position = Vector2( 2.53518e-06, -1 )
 rotation = -3.14159
 scale = Vector2( 1.00754, -0.762963 )
 shape = SubResource( 1 )
@@ -27,4 +27,5 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( -20, -19.5 )
 scale = Vector2( 0.375, 0.390625 )
+z_index = 2
 texture = ExtResource( 3 )
