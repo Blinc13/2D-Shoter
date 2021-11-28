@@ -1,11 +1,10 @@
 extends RigidBody2D
 
-export(float) var windage=0.5
-export(float) var speed=200
+class_name Bullet
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
+export(float) var windage=0.001
+export(float) var speed=300
+export(float) var damage=0.2
 
 func start(point:Vector2,pos:Vector2):
 	linear_velocity=point*speed
@@ -13,11 +12,13 @@ func start(point:Vector2,pos:Vector2):
 	rotate(point.angle())
 	$AnimatedSprite.playing=true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
 func _physics_process(delta):
 	linear_velocity-=linear_velocity*(windage*delta)
-	if linear_velocity.length() < 5:
+	if linear_velocity.length()<3:
 		free()
+
+func damage():
+	return int(damage*linear_velocity.length()/2)
+
+func _on_Timer_timeout():
+	print("What the fuck ?")
