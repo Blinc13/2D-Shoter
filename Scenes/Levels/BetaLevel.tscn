@@ -65,6 +65,7 @@ position = Vector2( 511, -76 )
 texture = ExtResource( 2 )
 
 [node name="Line2D" type="Line2D" parent="."]
+width = 5.0
 default_color = Color( 0.027451, 0.188235, 1, 1 )
 
 [node name="Area2D" type="Area2D" parent="."]

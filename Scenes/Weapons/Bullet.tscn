@@ -12,7 +12,7 @@ extents = Vector2( 1, 1 )
 [node name="Bullet" type="RigidBody2D"]
 physics_material_override = SubResource( 2 )
 script = ExtResource( 2 )
-windage = -0.002
+windage = 0.1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
@@ -20,3 +20,16 @@ animation = "Fire"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+lifetime = 0.5
+randomness = 0.5
+emission_shape = 2
+emission_rect_extents = Vector2( 1, 1 )
+gravity = Vector2( 0, 0 )
+hue_variation = 0.43
+hue_variation_random = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
