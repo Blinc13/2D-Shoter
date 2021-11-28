@@ -5,6 +5,8 @@ extends KinematicBody2D
 # var a = 2
 # var b = "text"
 
+var path_pos:int
+var path:    PoolVector2Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,5 +14,5 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	get_node("../Line2D").points=get_node("../Nav").get_simple_path(position,get_node("../Hero").position)
