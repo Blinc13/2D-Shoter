@@ -1,8 +1,7 @@
 extends RigidBody2D
 
-export(float) var windage
-
-const speed=200
+export(float) var windage=0.5
+export(float) var speed=200
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,3 +19,5 @@ func start(point:Vector2,pos:Vector2):
 
 func _physics_process(delta):
 	linear_velocity-=linear_velocity*(windage*delta)
+	if linear_velocity.length() < 5:
+		free()
