@@ -1,10 +1,5 @@
 extends KinematicBody2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 var Bullet=preload("res://Scenes/Weapons/Bullet.tscn")
 
 const speed=150
@@ -21,10 +16,10 @@ func _input(event):
 	if event is InputEventMouseMotion:
 		firePos=get_local_mouse_position()
 		firePos=firePos.normalized()
-		$Sprite.position=get_local_mouse_position()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var dash=Input.is_action_pressed("Dash")
 	if Input.is_action_pressed("Up"):
 		velocity.y-=1
 	if Input.is_action_pressed("Down"):
@@ -47,8 +42,14 @@ func _process(delta):
 	else:
 		$AnimatedSprite.playing=true
 	
-	move_and_slide(velocity.normalized()*speed)
+	move_and_slide(velocity.normalized()*(speed+500*int(dash)))
 	velocity=Vector2()
 	reload+=delta
 	
 	#print_debug(delta)
+
+
+func _on_Area2D_body_entered(body:Bullet):
+	#if body == null:
+	#	return
+	print("Бля я маслину помал: "+str(body.damage()))

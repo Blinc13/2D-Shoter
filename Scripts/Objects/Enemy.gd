@@ -1,10 +1,5 @@
 extends KinematicBody2D
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 var path_pos:int
 var path:    PoolVector2Array
 
@@ -15,4 +10,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	get_node("../Line2D").points=get_node("../Nav").get_simple_path(position,get_node("../Hero").position)
+	$"../Line2D".points=$"../Nav".get_simple_path(position,$"../Hero".position)
+
+
+func _on_Area2D_body_entered(body:Bullet):
+	print("Павуку пизда: "+str(body.damage()))
