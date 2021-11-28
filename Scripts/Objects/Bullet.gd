@@ -14,7 +14,7 @@ func start(point:Vector2,pos:Vector2):
 
 func _physics_process(delta):
 	linear_velocity-=linear_velocity*(windage*delta)
-	if linear_velocity.length()<3:
+	if linear_velocity.length()<5:
 		free()
 
 func damage():
