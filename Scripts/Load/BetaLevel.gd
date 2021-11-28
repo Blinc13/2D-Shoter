@@ -13,8 +13,7 @@ func _ready():
 	nod.init(node)
 	add_child(node)
 	node.add_child(nod)
-	
-	$Line2D.points=$Nav.get_simple_path(node.position,Vector2(85,-100))
+	add_child(preload("res://Scenes/Another/Enemy.tscn").instance())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
