@@ -1,17 +1,38 @@
 extends KinematicBody2D
 
-var path_pos:int
+export(float) var health=100
+export(float) var attack_radius=4
+export(float) var speed=50
+export(float) var damage=20
+
+var pos:int
 var path:    PoolVector2Array
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	$"../Line2D".points=$"../Nav".get_simple_path(position,$"../Hero".position)
-
+	var distance=speed*delta
+	if pos==path.size():
+		path=$"../Nav".get_simple_path(position,$"../Hero".position)
+		pos=1
+	elif position.distance_to(path[pos])<2:
+		pos+=1
+	else:
+		var new_pos=position.linear_interpolate(path[pos],distance/position.distance_to(path[pos]))
+		if new_pos.x<position.x:
+			$AnimatedSprite.flip_h=true
+		else:
+			$AnimatedSprite.flip_h=false
+		position=new_pos
+	if position.distance_to($"../Hero".position)<14+attack_radius:
+		$AnimatedSprite.play("attack")
+	else:
+		$AnimatedSprite.play("run")
 
 func _on_Area2D_body_entered(body:Bullet):
-	print("Павуку пизда: "+str(body.damage()))
+	if body==null:
+		return
+	health-=body.damage(Vector2(0,0))
+	print(health)
+	#if health<=0:
+	#	$AnimatedSprite.play("death")
+	#	$AnimatedSprite.update()
+	body.free()

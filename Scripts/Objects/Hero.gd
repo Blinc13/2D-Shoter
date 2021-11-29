@@ -1,9 +1,12 @@
 extends KinematicBody2D
 
+class_name Hero
+
 var Bullet=preload("res://Scenes/Weapons/Bullet.tscn")
 
-const speed=150
-const relTime=0.2
+export(float) var speed=150
+export(float) var relTime=0.3
+export(float) var health=100
 var velocity: Vector2
 var firePos: Vector2
 var reload=relTime
@@ -14,12 +17,12 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		firePos=get_local_mouse_position()
-		firePos=firePos.normalized()
+		firePos=get_local_mouse_position().normalized()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(delta:float):
 	var dash=Input.is_action_pressed("Dash")
+	velocity=Vector2()
 	if Input.is_action_pressed("Up"):
 		velocity.y-=1
 	if Input.is_action_pressed("Down"):
@@ -34,7 +37,7 @@ func _process(delta):
 	if Input.is_action_pressed("Fire") and reload>=relTime:
 		reload=0
 		var node=Bullet.instance()
-		node.start(firePos,position+firePos*6)
+		node.start(firePos,position+firePos*10)
 		get_parent().add_child(node)
 	
 	if velocity.length() == 0:
@@ -43,13 +46,14 @@ func _process(delta):
 		$AnimatedSprite.playing=true
 	
 	move_and_slide(velocity.normalized()*(speed+500*int(dash)))
-	velocity=Vector2()
 	reload+=delta
 	
 	#print_debug(delta)
 
 
 func _on_Area2D_body_entered(body:Bullet):
-	#if body == null:
-	#	return
-	print("Бля я маслину помал: "+str(body.damage()))
+	if body==null:
+		return
+	#print("Бля я маслину помал: "+str(body.damage(velocity)))
+	health-=body.damage(velocity)
+	body.free()
