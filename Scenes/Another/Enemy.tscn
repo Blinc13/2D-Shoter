@@ -15,7 +15,7 @@ polygon = PoolVector2Array( 8, 3, 4, 7, -4, 7, -8, 4, -7, -3, -4, -7, 2, -7, 6, 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "run"
-frame = 3
+frame = 1
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

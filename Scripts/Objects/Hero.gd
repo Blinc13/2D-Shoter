@@ -7,19 +7,15 @@ var Bullet=preload("res://Scenes/Weapons/Bullet.tscn")
 export(float) var speed=150
 export(float) var relTime=0.3
 export(float) var health=100
+
 var velocity: Vector2
 var firePos: Vector2
 var reload=relTime
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
 
 func _input(event):
 	if event is InputEventMouseMotion:
 		firePos=get_local_mouse_position().normalized()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta:float):
 	var dash=Input.is_action_pressed("Dash")
 	velocity=Vector2()
@@ -47,13 +43,9 @@ func _process(delta:float):
 	
 	move_and_slide(velocity.normalized()*(speed+500*int(dash)))
 	reload+=delta
-	
-	#print_debug(delta)
-
 
 func _on_Area2D_body_entered(body:Bullet):
 	if body==null:
 		return
-	#print("Бля я маслину помал: "+str(body.damage(velocity)))
 	health-=body.damage(velocity)
 	body.free()
