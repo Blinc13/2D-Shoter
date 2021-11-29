@@ -14,6 +14,6 @@ func _ready():
 
 func _process(delta):
 	time+=delta
-	if time>0.5:
+	if time>20:
 		add_child(enemy.instance())
 		time=0
