@@ -48,4 +48,4 @@ func _on_Area2D_body_entered(body:Bullet):
 	if body==null:
 		return
 	health-=body.damage(velocity)
-	body.free()
+	body.queue_free()

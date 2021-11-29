@@ -27,5 +27,4 @@ func damage(vel:Vector2):
 	return int(damage*(linear_velocity-vel).length()/2)
 
 func _on_Timer_timeout():
-	#print("What the fuck ?")
 	destroy=true
