@@ -6,19 +6,22 @@ export(float) var speed=50
 export(float) var damag=20
 export(float) var dead_visible_time
 
-var pos:int
 var target
+var nav
+
+var pos:int
 var attacking:bool
 var death:bool
 var path:    PoolVector2Array
 
 func _ready():
-	target=$"../Hero"
+	target=$"/root/Level/Hero"
+	nav=$"/root/Level/Nav"
 	attack_radius+=14
 
 func _process(delta):
 	if pos==path.size():
-		path=$"../Nav".get_simple_path(position,target.position,true)
+		path=nav.get_simple_path(position,target.position,true)
 		pos=1
 	elif position.distance_to(path[pos])<2:
 		pos+=1
