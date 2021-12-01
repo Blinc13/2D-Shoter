@@ -12,6 +12,7 @@ func start(point:Vector2,pos:Vector2):
 	$AnimatedSprite.playing=true
 
 func _physics_process(delta:float):
+	set_linear_damp(speed*0.5 / linear_velocity.length())
 	if linear_velocity.length()<3:
 		$AnimatedSprite.play("Destroy")
 		$Timer.start(0.18)
