@@ -2,7 +2,6 @@ extends RigidBody2D
 
 class_name Bullet
 
-export(float) var windage=0.001
 export(float) var speed=300
 export(float) var damage=0.2
 
@@ -12,13 +11,15 @@ func start(point:Vector2,pos:Vector2):
 	rotate(point.angle())
 	$AnimatedSprite.playing=true
 
-func _physics_process(delta):
-	linear_velocity-=linear_velocity*(windage*delta)
-	if linear_velocity.length()<5:
-		free()
+func _physics_process(delta:float):
+	set_linear_damp(speed*0.5 / linear_velocity.length())
+	if linear_velocity.length()<3:
+		$AnimatedSprite.play("Destroy")
+		$Timer.start(0.18)
+		set_physics_process(false)
 
-func damage():
-	return int(damage*linear_velocity.length()/2)
+func damage(vel:Vector2):
+	return int(damage*(linear_velocity-vel).length()/2)
 
 func _on_Timer_timeout():
-	print("What the fuck ?")
+	queue_free()
