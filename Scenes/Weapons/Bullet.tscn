@@ -5,7 +5,7 @@
 
 [sub_resource type="PhysicsMaterial" id=2]
 friction = 0.7
-bounce = 0.92
+bounce = 1.0
 
 [node name="Bullet" type="RigidBody2D"]
 collision_layer = 2
@@ -20,7 +20,9 @@ frames = ExtResource( 1 )
 animation = "Fire"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 1, 1, -1, 1, 0, -1 )
+position = Vector2( 0.2, -0.2 )
+scale = Vector2( 1.125, 1.125 )
+polygon = PoolVector2Array( -1.06667, -0.711111, -1.06667, 1.06667, 0.711111, 0.177778 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.095

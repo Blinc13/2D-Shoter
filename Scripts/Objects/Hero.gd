@@ -15,6 +15,11 @@ var reload=relTime
 func _input(event):
 	if event is InputEventMouseMotion:
 		firePos=get_local_mouse_position().normalized()
+	if event is InputEventJoypadMotion:
+		if event.axis==JOY_AXIS_2:
+			firePos.x=event.axis_value
+		elif event.axis==JOY_AXIS_3:
+			firePos.y=event.axis_value
 
 func _process(delta:float):
 	var dash=Input.is_action_pressed("Dash")
@@ -36,16 +41,20 @@ func _process(delta:float):
 		node.start(firePos,position+firePos*10)
 		get_parent().add_child(node)
 	
-	if velocity.length() == 0:
-		$AnimatedSprite.playing=false
-	else:
-		$AnimatedSprite.playing=true
+	$AnimatedSprite.playing=velocity.x!=0
 	
 	move_and_slide(velocity.normalized()*(speed+500*int(dash)))
 	reload+=delta
 
+func damage(dam:float):
+	health-=dam
+	
+	if health<1:
+		set_process(false)
+
+
 func _on_Area2D_body_entered(body:Bullet):
-	if body==null:
-		return
-	health-=body.damage(velocity)
+	if body==null:return
+	
+	damage(body.damage(velocity*speed))
 	body.queue_free()

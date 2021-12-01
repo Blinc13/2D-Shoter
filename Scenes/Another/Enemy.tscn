@@ -14,13 +14,12 @@ collision_mask = 0
 script = ExtResource( 2 )
 attack_radius = 5.0
 speed = 40.0
-damage = 10.0
 dead_visible_time = 5.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
 animation = "run"
-frame = 3
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
