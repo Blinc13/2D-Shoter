@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Images/Sprites/Bullet/Animation/BulletAnimation.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Objects/Bullet.gd" type="Script" id=2]
+[ext_resource path="res://Images/Sprites/Bullet/Particles.tres" type="Material" id=3]
 
 [sub_resource type="PhysicsMaterial" id=2]
 friction = 0.7
@@ -11,9 +12,12 @@ bounce = 1.0
 collision_layer = 2
 collision_mask = 2
 physics_material_override = SubResource( 2 )
+contacts_reported = 1
+contact_monitor = true
 linear_damp = 0.3
 script = ExtResource( 2 )
 speed = 220.0
+dfactor = 0.35
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
@@ -26,5 +30,10 @@ polygon = PoolVector2Array( -1.06667, -0.711111, -1.06667, 1.06667, 0.711111, 0.
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.095
+
+[node name="Particles" type="Particles2D" parent="."]
+amount = 30
+local_coords = false
+process_material = ExtResource( 3 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
