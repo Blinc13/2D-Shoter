@@ -2,19 +2,21 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/hit-sparks.png-47a3827c46eaff10f6becbda4e000b7b.stex"
+path.s3tc="res://.import/hit-sparks.png-47a3827c46eaff10f6becbda4e000b7b.s3tc.stex"
+path.etc2="res://.import/hit-sparks.png-47a3827c46eaff10f6becbda4e000b7b.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Images/Sprites/Bullet/hit-sparks.png"
-dest_files=[ "res://.import/hit-sparks.png-47a3827c46eaff10f6becbda4e000b7b.stex" ]
+dest_files=[ "res://.import/hit-sparks.png-47a3827c46eaff10f6becbda4e000b7b.s3tc.stex", "res://.import/hit-sparks.png-47a3827c46eaff10f6becbda4e000b7b.etc2.stex" ]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
