@@ -5,7 +5,6 @@ export(int)         var MaxUnits=10
 export(PackedScene) var UnitScene
 
 var time: float
-var units:Array
 
 signal unit_spawned(body)
 
@@ -16,9 +15,8 @@ func reinit(node:PackedScene,timeInterval):
 func _process(delta):
 	time+=delta
 	
-	print(units.size())
-	
-	if time>Delay and units.size()<MaxUnits:
-		units.append(UnitScene.instance())
-		get_parent().add_child(units.back())
+	if time>Delay and get_child_count()<MaxUnits:
+		var unit=UnitScene.instance()
+		add_child(unit)
+		emit_signal("unit_spawned",unit)
 		time=0
