@@ -4,7 +4,7 @@ export(float) var health=100
 export(float) var attack_radius=4
 export(float) var speed=50
 export(float) var damag=20
-export(float) var dead_visible_time
+export(float) var dead_visible_time=10
 
 var target
 var nav
@@ -20,19 +20,20 @@ func _ready():
 	attack_radius+=14
 
 func _process(delta):
+	var pos_g=get_global_position()
 	if pos==path.size():
-		path=nav.get_simple_path(position,target.position,true)
+		path=nav.get_simple_path(pos_g,target.position,true)
 		pos=1
-	elif position.distance_to(path[pos])<2:
+	elif pos_g.distance_to(path[pos])<2:
 		pos+=1
 	else:
-		var new_pos=position.linear_interpolate(path[pos],speed*delta/position.distance_to(path[pos]))
-		$AnimatedSprite.flip_h=position.x>new_pos.x
-		position=new_pos
-		attack()
+		var new_pos=pos_g.linear_interpolate(path[pos],speed*delta/pos_g.distance_to(path[pos]))
+		$AnimatedSprite.flip_h=pos_g.x>new_pos.x
+		set_global_position(new_pos)
+		attack(new_pos)
 
-func attack():
-	if position.distance_to(target.position)<attack_radius:
+func attack(pos:Vector2):
+	if pos.distance_to(target.position)<attack_radius:
 		$AnimatedSprite.play("attack")
 		attacking=true
 		set_process(false)
