@@ -7,10 +7,15 @@ var Bullet=preload("res://Scenes/Weapons/Bullet.tscn")
 export(float) var speed=150
 export(float) var relTime=0.3
 export(float) var health=100
+export(float) var dsTime = 0.3
+export(float) var dsRelTime = 1
 
 var velocity: Vector2
 var firePos: Vector2
 var reload=relTime
+var dsReload = 0
+var dash = 0
+
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -22,7 +27,8 @@ func _input(event):
 			firePos.y=event.axis_value
 
 func _process(delta:float):
-	var dash=Input.is_action_pressed("Dash")
+	reload+=delta
+	dsReload+=delta
 	velocity=Vector2()
 	if Input.is_action_pressed("Up"):
 		velocity.y-=1
@@ -44,8 +50,16 @@ func _process(delta:float):
 	
 	$AnimatedSprite.playing=velocity.x!=0
 	
-	move_and_slide(velocity.normalized()*(speed+500*int(dash)))
-	reload+=delta
+	move_and_slide(velocity.normalized()*speed*(1+dash))
+	dash()
+
+func dash():
+	if Input.is_action_pressed("Dash") and dsReload >= dsRelTime:
+		dash = 2
+		$Timer.start(dsTime)
+		dsReload = 0 
+func _on_Timer_timeout():
+	dash = 0
 
 func damage(dam:float):
 	health-=dam
@@ -53,10 +67,8 @@ func damage(dam:float):
 	if health<1:
 		set_process(false)
 
-
 func _on_Area2D_body_entered(body:Bullet):
 	if body==null:return
 	
 	damage(body.damage(velocity*speed))
 	body.queue_free()
-
