@@ -27,8 +27,8 @@ func _on_Timer_timeout():
 
 func _on_Bullet_body_shape_entered(body_rid, body, body_shape_index, local_shape_index):
 	$Particles.amount=linear_velocity.length()/10
+	$Particles.global_rotation=Physics2DServer.body_get_direct_state(get_rid()).get_contact_local_normal(0).angle()
 	$Particles.restart()
-	print("Test",self)
 
 func _on_Bullet_body_shape_exited(body_rid, body, body_shape_index, local_shape_index):
 	$Particles.emitting=false
