@@ -40,6 +40,7 @@ func _process(delta:float):
 		var node=Bullet.instance()
 		node.start(firePos,position+firePos*10)
 		get_parent().add_child(node)
+		$SoundPlayer.play(0)
 	
 	$AnimatedSprite.playing=velocity.x!=0
 	
@@ -58,3 +59,4 @@ func _on_Area2D_body_entered(body:Bullet):
 	
 	damage(body.damage(velocity*speed))
 	body.queue_free()
+
