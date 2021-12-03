@@ -3,6 +3,7 @@ extends KinematicBody2D
 class_name Hero
 
 var Bullet=preload("res://Scenes/Weapons/Bullet.tscn")
+var Grenade=preload("res://Scenes/Weapons/Grenade.tscn")
 
 export(float) var speed=150
 export(float) var relTime=0.3
@@ -25,6 +26,7 @@ func _input(event):
 			firePos.x=event.axis_value
 		elif event.axis==JOY_AXIS_3:
 			firePos.y=event.axis_value
+		firePos=firePos.normalized()
 
 func _process(delta:float):
 	reload+=delta
@@ -48,6 +50,12 @@ func _process(delta:float):
 		get_parent().add_child(node)
 		$SoundPlayer.play(0)
 	
+	if Input.is_action_pressed("Grenade") and reload>=relTime:
+		reload=0
+		var node=Grenade.instance()
+		node.start(firePos,position+firePos*10)
+		get_parent().add_child(node)
+	
 	$AnimatedSprite.playing=velocity.x!=0
 	
 	move_and_slide(velocity.normalized()*speed*(1+dash))
@@ -55,9 +63,10 @@ func _process(delta:float):
 
 func dash():
 	if Input.is_action_pressed("Dash") and dsReload >= dsRelTime:
-		dash = 2
+		dash = 10
 		$Timer.start(dsTime)
 		dsReload = 0 
+
 func _on_Timer_timeout():
 	dash = 0
 
