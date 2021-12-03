@@ -12,7 +12,12 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://Scripts/Objects/Bullet.gd"
+"path": "res://Scripts/Objects/Bullets/Bullet.gd"
+}, {
+"base": "KinematicBody2D",
+"class": "Enemy",
+"language": "GDScript",
+"path": "res://Scripts/Objects/Enemys/Enemy.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Hero",
@@ -21,6 +26,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"Enemy": "",
 "Hero": ""
 }
 
@@ -76,11 +82,21 @@ Dash={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":7,"pressure":0.0,"pressed":false,"script":null)
  ]
 }
+Grenade={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":4,"pressure":0.0,"pressed":false,"script":null)
+ ]
+}
 
 [layer_names]
 
 2d_physics/layer_1="Heroes and enemies"
 2d_physics/layer_2="Bullets"
+
+[memory]
+
+limits/command_queue/multithreading_queue_size_kb=528
 
 [physics]
 
@@ -92,4 +108,5 @@ common/physics_fps=80
 [rendering]
 
 threads/thread_model=2
+threads/thread_safe_bvh=true
 quality/filters/anisotropic_filter_level=1
