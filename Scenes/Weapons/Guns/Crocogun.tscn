@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Objects/Weapons/Weapon.gd" type="Script" id=1]
+[ext_resource path="res://Images/Sprites/Crocogun/Animation/CrocogunAnimation.tres" type="SpriteFrames" id=2]
+
+[node name="Node2D" type="AnimatedSprite"]
+frames = ExtResource( 2 )
+script = ExtResource( 1 )
