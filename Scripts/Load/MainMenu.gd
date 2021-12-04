@@ -8,4 +8,8 @@ func _on_SettingsBtn_pressed():
 	$TabContainer.visible = !$TabContainer.visible
 
 func _on_ExitBtn_pressed():
-	pass # Replace with function body.
+	
+	pass
+
+func _on_AudioValume_value_changed(value):
+	$TabContainer/Audio/Label2.text = str(value)
