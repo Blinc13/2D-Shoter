@@ -10,18 +10,73 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
-anchor_left = 0.001
-anchor_top = 0.927
-anchor_right = 0.128
-anchor_bottom = 1.0
-margin_left = -0.024
-margin_top = -0.200012
-margin_right = -0.0720062
-margin_bottom = -2.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.002
+anchor_top = 0.873
+anchor_right = 0.196
+anchor_bottom = 1.017
+margin_left = 3.952
+margin_top = -62.8
+margin_right = 8.29599
+margin_bottom = 23.7999
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayBtn" type="Button" parent="VBoxContainer"]
+margin_top = 52.0
+margin_right = 203.0
+margin_bottom = 72.0
 text = "Play"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+[node name="SettingsBtn" type="Button" parent="VBoxContainer"]
+margin_top = 76.0
+margin_right = 203.0
+margin_bottom = 96.0
+text = "Settings"
+
+[node name="ExitBtn" type="Button" parent="VBoxContainer"]
+margin_top = 100.0
+margin_right = 203.0
+margin_bottom = 120.0
+text = "Exit"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+anchor_left = 0.319
+anchor_top = 0.243
+anchor_right = 0.627
+anchor_bottom = 0.782
+margin_left = 0.343994
+margin_top = -16.8
+margin_right = -0.0480347
+margin_bottom = -0.200043
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio" type="Button" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = 8.0
+margin_bottom = 16.0
+text = "Hui"
+
+[node name="Button2" type="Button" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -182.0
+margin_bottom = -63.0
+text = "Huii"
+
+[connection signal="pressed" from="VBoxContainer/PlayBtn" to="." method="_on_PlayBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsBtn" to="." method="_on_SettingsBtn_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
