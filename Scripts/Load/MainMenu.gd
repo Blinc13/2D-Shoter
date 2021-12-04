@@ -5,10 +5,7 @@ func _on_PlayBtn_pressed():
 	print(SIZE_EXPAND)
 
 func _on_SettingsBtn_pressed():
-	if $TabContainer.visible == false:
-		$TabContainer.visible = true
-	else:
-		$TabContainer.visible = false
+	$TabContainer.visible = !$TabContainer.visible
 
 func _on_ExitBtn_pressed():
 	pass # Replace with function body.
