@@ -11,13 +11,13 @@ __meta__ = {
 }
 
 [node name="TabContainer" type="TabContainer" parent="."]
+visible = false
 anchor_left = 0.319
-anchor_top = 0.243
+anchor_top = 0.215
 anchor_right = 0.627
 anchor_bottom = 0.782
 margin_left = 0.343994
-margin_top = -16.8
-margin_right = -0.0480347
+margin_right = -0.0480957
 margin_bottom = -0.200043
 tab_align = 0
 __meta__ = {
@@ -31,9 +31,49 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
-text = "Hui"
 
-[node name="Button2" type="Button" parent="TabContainer"]
+[node name="Label" type="Label" parent="TabContainer/Audio"]
+anchor_left = 0.101
+anchor_top = 0.082
+anchor_right = 0.26
+anchor_bottom = 0.138
+margin_left = -0.130987
+margin_top = 0.0720024
+margin_right = 0.056015
+margin_bottom = -0.0320015
+text = "Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioValume" type="HSlider" parent="TabContainer/Audio"]
+anchor_left = 1.709
+anchor_top = 7.5
+anchor_right = 2.438
+anchor_bottom = 8.3
+margin_left = -491.663
+margin_top = -2237.0
+margin_right = -553.466
+margin_bottom = -2434.2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="TabContainer/Audio"]
+anchor_left = 0.713
+anchor_top = 0.184
+anchor_right = 0.844
+anchor_bottom = 0.23
+margin_left = 0.109024
+margin_top = 0.0639992
+margin_right = -0.107971
+margin_bottom = 0.0800095
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Video" type="Button" parent="TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -41,7 +81,15 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
-text = "Huii"
+
+[node name="Controls" type="Button" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -299.0
+margin_bottom = -288.0
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchor_right = 0.198
@@ -81,6 +129,7 @@ margin_right = 203.0
 margin_bottom = 68.0
 text = "Exit"
 
+[connection signal="value_changed" from="TabContainer/Audio/AudioValume" to="." method="_on_AudioValume_value_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/PlayBtn" to="." method="_on_PlayBtn_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsBtn" to="." method="_on_SettingsBtn_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
