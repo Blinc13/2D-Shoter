@@ -36,8 +36,13 @@ config/name="Shoter2D"
 run/main_scene="res://Scenes/Another/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalVariables="*res://Scripts/Load/Global_variables.gd"
+
 [display]
 
+window/vsync/use_vsync=false
 mouse_cursor/custom_image="res://Images/Sprites/Ui/mouse-pointer.png"
 
 [input]
