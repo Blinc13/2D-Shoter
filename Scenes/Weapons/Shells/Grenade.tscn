@@ -24,7 +24,7 @@ explTime = 2.0
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 3 )
 animation = "Throw"
-frame = 3
+frame = 5
 playing = true
 
 [node name="Collision" type="CollisionShape2D" parent="."]

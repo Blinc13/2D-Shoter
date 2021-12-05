@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/Load/BetaLevel.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Images/Textures/Map/Data/MapTiles.tres" type="TileSet" id=3]
 [ext_resource path="res://Images/Sprites/Objects/Data/ObjectsTiles.tres" type="TileSet" id=4]
+[ext_resource path="res://Scenes/Another/UnitSpawner.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Another/Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Items/Guns/GunItem.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 738.5, 10 )
@@ -99,3 +102,10 @@ gravity = 850.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -4, 4 )
 shape = SubResource( 3 )
+
+[node name="UnitSpawner" parent="." instance=ExtResource( 5 )]
+position = Vector2( 192, 142 )
+UnitScene = ExtResource( 6 )
+
+[node name="CrocogunItem" parent="." instance=ExtResource( 7 )]
+position = Vector2( 265, -95 )
