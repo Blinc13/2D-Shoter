@@ -11,12 +11,15 @@ export(float) var dsRelTime = 1
 
 var velocity: Vector2
 var firePos: Vector2
-onready var weapon=$Weapons/Weapon
-var dsReload = 0
-var dash = 0
+onready var weapon
+var k:int
+var ChReload:float
+var dsReload:float
+var dash:float
 
 func _ready():
 	$SoundPlayer.volume_db=GlobalVariables.variables["Sounds"]
+	weapon=$Weapons.get_child(0)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -30,6 +33,7 @@ func _input(event):
 
 func _process(delta:float):
 	dsReload+=delta
+	ChReload+=delta
 	velocity=Vector2()
 	if Input.is_action_pressed("Up"):
 		velocity.y-=1
@@ -44,12 +48,17 @@ func _process(delta:float):
 	
 	if Input.is_action_pressed("Fire") and weapon.reloaded:
 		$SoundPlayer.play(0)
-		$Weapons/Weapon.fire(firePos,position+firePos*10)
+		weapon.fire(firePos,position+firePos*10)
 	
 	if Input.is_action_pressed("Grenade") and weapon.reloaded:
-		var node=Grenade.instance()
-		node.start(firePos,position+firePos*10)
-		get_parent().add_child(node)
+		weapon.altFire(firePos,position+firePos*10)
+	
+	if Input.is_action_pressed("ChWeapon") and ChReload>0.5:
+		k+=1
+		ChReload=0
+		if k>=$Weapons.get_child_count():
+			k=0
+		weapon=$Weapons.get_child(k)
 	
 	$AnimatedSprite.playing=velocity.x!=0
 	

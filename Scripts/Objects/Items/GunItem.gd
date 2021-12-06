@@ -11,7 +11,7 @@ func _ready():
 
 func use_item(obj):
 	if obj is Hero:
-		if obj.get_child(0).get_node(Name) != null:
+		if obj.get_child(0).get_node_or_null(Name) != null:
 			pass
 		else:
 			obj.get_child(0).add_child(Gun.instance())

@@ -23,3 +23,6 @@ func fire(vel:Vector2,pos:Vector2):
 	reloaded=false
 	node.start(vel,pos,BulletBoost)
 	get_node("/root/Level").add_child(node)
+
+func altFire(vel:Vector2,pos:Vector2):
+	pass

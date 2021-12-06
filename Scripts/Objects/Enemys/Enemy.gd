@@ -24,7 +24,7 @@ func _ready():
 func _process(delta):
 	var pos_g=get_global_position()
 	if pos==path.size():
-		path=nav.get_simple_path(pos_g,target.position,true)
+		path=nav.get_simple_path(pos_g,target.position)
 		pos=1
 	elif pos_g.distance_to(path[pos])<2:
 		pos+=1

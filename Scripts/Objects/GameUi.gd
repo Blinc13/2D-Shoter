@@ -8,4 +8,4 @@ func init(node):
 func _process(delta):
 	$Label.text=str(hero.health)
 	$AnimatedSprite.position=get_viewport().get_mouse_position()
-	$AnimatedSprite.frame=hero.get_node("Weapons/Weapon").reload/hero.get_node("Weapons/Weapon").relTime*5
+	$AnimatedSprite.frame=hero.weapon.reload/hero.weapon.relTime*5
