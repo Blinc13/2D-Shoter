@@ -21,7 +21,7 @@ func _ready():
 	nav=$"/root/Level/Nav"
 	attack_radius+=14
 
-func _process(delta):
+func move_to_target(distance):
 	var pos_g=get_global_position()
 	if pos==path.size():
 		path=nav.get_simple_path(pos_g,target.position)
@@ -29,7 +29,7 @@ func _process(delta):
 	elif pos_g.distance_to(path[pos])<2:
 		pos+=1
 	else:
-		var new_pos=pos_g.linear_interpolate(path[pos],speed*delta/pos_g.distance_to(path[pos]))
+		var new_pos=pos_g.linear_interpolate(path[pos],distance/pos_g.distance_to(path[pos]))
 		$AnimatedSprite.flip_h=pos_g.x>new_pos.x
 		set_global_position(new_pos)
 		attack()
