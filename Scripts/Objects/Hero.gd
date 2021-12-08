@@ -54,9 +54,8 @@ func _process(delta:float):
 		$SoundPlayer.play(0)
 		weapon.fire(firePos,position+firePos*10)
 	
-	if Input.is_action_pressed("Grenade") and weapon.reloaded:
-		#weapon.altFire(firePos,position+firePos*10)
-		pass
+	if Input.is_action_pressed("Grenade") and weapon.altReloaded:
+		weapon.altFire(firePos,position+firePos*10)
 	
 	if Input.is_action_pressed("ChWeapon") and ChReload>0.5:
 		k+=1

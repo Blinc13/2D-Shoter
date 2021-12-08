@@ -67,7 +67,3 @@ func _on_AnimatedSprite_animation_finished():
 		if global_position.distance_to(target.position)<=attack_radius:
 			target.damage(damag)
 		set_process(true)
-
-
-func _on_Timer_timeout():
-	queue_free()
