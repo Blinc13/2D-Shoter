@@ -47,8 +47,8 @@ func damage(dam:float):
 		$Timer.start(dead_visible_time)
 		$AnimatedSprite.play("death")
 		
+		$HitBox.set_deferred("monitoring",false)
 		set_collision_layer_bit(0,false)
-		$Area2D.set_collision_layer_bit(1,false)
 		
 		set_process(false)
 		death=true

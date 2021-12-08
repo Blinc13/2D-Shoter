@@ -1,11 +1,17 @@
 extends CanvasLayer
 
+export(NodePath) var HeroNodePath
 var hero
 
-func init(node):
-	hero=node
+func _ready():
+	hero=get_node(HeroNodePath)
+
+func _input(event):
+	if event is InputEventMouseMotion:
+		$AnimatedSprite.position=get_viewport().get_mouse_position()
 
 func _process(delta):
-	$Label.text=str(hero.health)
-	$AnimatedSprite.position=get_viewport().get_mouse_position()
-	$AnimatedSprite.frame=hero.weapon.reload/hero.weapon.relTime*5
+	$AnimatedSprite.frame=hero.weapon.rel/hero.weapon.relTime*5
+
+func HealthChanged(value):
+	$Label.text=str(value)

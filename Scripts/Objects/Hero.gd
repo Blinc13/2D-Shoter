@@ -17,6 +17,10 @@ var ChReload:float
 var dsReload:float
 var dash:float
 
+signal HealthChanged(value)
+signal Dead()
+signal AmmoEdit(value)
+
 func _ready():
 	$SoundPlayer.volume_db=GlobalVariables.variables["Sounds"]
 	weapon=$Weapons.get_child(0)
@@ -51,7 +55,8 @@ func _process(delta:float):
 		weapon.fire(firePos,position+firePos*10)
 	
 	if Input.is_action_pressed("Grenade") and weapon.reloaded:
-		weapon.altFire(firePos,position+firePos*10)
+		#weapon.altFire(firePos,position+firePos*10)
+		pass
 	
 	if Input.is_action_pressed("ChWeapon") and ChReload>0.5:
 		k+=1
@@ -76,8 +81,10 @@ func _on_Timer_timeout():
 
 func damage(dam:float):
 	health-=dam
+	emit_signal("HealthChanged",health)
 	
 	if health<1:
+		emit_signal("Dead")
 		set_process(false)
 
 func _on_Area2D_body_entered(body:Bullet):

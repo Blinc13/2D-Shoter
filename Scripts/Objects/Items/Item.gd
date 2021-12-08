@@ -1,20 +1,19 @@
-extends Node2D
+extends Sprite
 
 class_name Item
 
 export(float) var relTime=10
 
-var reloaded=true
-
+signal used
 
 func use_item(obj):
 	pass
 
 func Activated(obj):
-	if reloaded:
-		use_item(obj)
-		reloaded=false
-		$Timer.start(relTime)
+	use_item(obj)
+	$Area2D.set_deferred("monitoring",false)
+	$Timer.start(relTime)
+	emit_signal("used")
 
 func _on_Timer_timeout():
-	reloaded=true
+	$Area2D.set_deferred("monitoring",true)
