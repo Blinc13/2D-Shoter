@@ -47,8 +47,6 @@ scale_amount_random = 0.98
 color_ramp = SubResource( 1 )
 hue_variation_random = 1.0
 
-[node name="DestroyTimer" type="Timer" parent="."]
-
 [connection signal="body_shape_entered" from="." to="." method="Ricochet_beg"]
 [connection signal="body_shape_exited" from="." to="." method="Ricochet_end"]
-[connection signal="timeout" from="DestroyTimer" to="." method="_on_Timer_timeout"]
+[connection signal="animation_finished" from="Sprite" to="." method="queue_free"]

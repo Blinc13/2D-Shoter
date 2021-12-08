@@ -22,7 +22,7 @@ dsRelTime = 3.0
 [node name="Weapon" parent="Weapons" instance=ExtResource( 4 )]
 frames = null
 relTime = 1.0
-BulletBoost = 0.5
+bullet_boost = 1.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
