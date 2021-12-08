@@ -2,21 +2,19 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/big-explosion.png-3a42e369e08ba0b6d15a2b7a850a8e72.s3tc.stex"
-path.etc2="res://.import/big-explosion.png-3a42e369e08ba0b6d15a2b7a850a8e72.etc2.stex"
+path="res://.import/big-explosion.png-3a42e369e08ba0b6d15a2b7a850a8e72.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
 source_file="res://Images/Sprites/Grenade/big-explosion.png"
-dest_files=[ "res://.import/big-explosion.png-3a42e369e08ba0b6d15a2b7a850a8e72.s3tc.stex", "res://.import/big-explosion.png-3a42e369e08ba0b6d15a2b7a850a8e72.etc2.stex" ]
+dest_files=[ "res://.import/big-explosion.png-3a42e369e08ba0b6d15a2b7a850a8e72.stex" ]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
