@@ -1,0 +1,16 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=2]
+
+[sub_resource type="StreamTexture" id=2]
+load_path = "res://.import/Crocogun.png-607a1b46af3b4a2e9a4b6dfe8f5e521f.stex"
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = SubResource( 2 )
+region = Rect2( 0, 0, 63, 18 )
+
+[resource]
+animations = [ {
+"frames": [ SubResource( 1 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]

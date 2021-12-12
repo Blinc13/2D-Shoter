@@ -1,0 +1,136 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Load/MainMenu.gd" type="Script" id=1]
+
+[node name="Control" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+visible = false
+anchor_left = 0.319
+anchor_top = 0.215
+anchor_right = 0.627
+anchor_bottom = 0.782
+margin_left = 0.343994
+margin_right = -0.0480957
+margin_bottom = -0.200043
+tab_align = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio" type="Button" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Label" type="Label" parent="TabContainer/Audio"]
+anchor_left = 0.101
+anchor_top = 0.082
+anchor_right = 0.26
+anchor_bottom = 0.138
+margin_left = -0.130987
+margin_top = 0.0720024
+margin_right = 0.056015
+margin_bottom = -0.0320015
+text = "Volume"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioVolume" type="HSlider" parent="TabContainer/Audio"]
+anchor_left = 1.709
+anchor_top = 7.5
+anchor_right = 2.438
+anchor_bottom = 8.3
+margin_left = -491.663
+margin_top = -2237.0
+margin_right = -553.466
+margin_bottom = -2434.2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="TabContainer/Audio"]
+anchor_left = 0.713
+anchor_top = 0.184
+anchor_right = 0.844
+anchor_bottom = 0.23
+margin_left = 0.109024
+margin_top = 0.0639992
+margin_right = -0.107971
+margin_bottom = 0.0800095
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Video" type="Button" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Controls" type="Button" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 0.198
+anchor_bottom = 0.057
+margin_right = 0.247971
+margin_bottom = 34.8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 203.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 203, 68 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_right = 203.0
+margin_bottom = 20.0
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 203.0
+margin_bottom = 44.0
+text = "Settings"
+
+[node name="ExitBtn" type="Button" parent="MarginContainer/VBoxContainer"]
+margin_top = 48.0
+margin_right = 203.0
+margin_bottom = 68.0
+text = "Exit"
+
+[connection signal="value_changed" from="TabContainer/Audio/AudioVolume" to="." method="_on_AudioValume_value_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PlayBtn" to="." method="_on_PlayBtn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/SettingsBtn" to="." method="_on_SettingsBtn_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]

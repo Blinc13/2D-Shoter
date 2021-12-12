@@ -12,12 +12,17 @@ _global_script_classes=[ {
 "base": "RigidBody2D",
 "class": "Bullet",
 "language": "GDScript",
-"path": "res://Scripts/Objects/Bullets/Bullet.gd"
+"path": "res://Scripts/Objects/Shells/Bullets/Bullet.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
 "path": "res://Scripts/Objects/Enemys/Enemy.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Grenade",
+"language": "GDScript",
+"path": "res://Scripts/Objects/Shells/Grenades/Grenade.gd"
 }, {
 "base": "Item",
 "class": "GunItem",
@@ -29,10 +34,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Objects/Hero.gd"
 }, {
-"base": "Node2D",
+"base": "Sprite",
 "class": "Item",
 "language": "GDScript",
 "path": "res://Scripts/Objects/Items/Item.gd"
+}, {
+"base": "RigidBody2D",
+"class": "Rocket",
+"language": "GDScript",
+"path": "res://Scripts/Objects/Shells/Rockets/Rocket.gd"
+}, {
+"base": "Enemy",
+"class": "Spider",
+"language": "GDScript",
+"path": "res://Scripts/Objects/Enemys/Spider.gd"
 }, {
 "base": "AnimatedSprite",
 "class": "Weapon",
@@ -42,9 +57,12 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Bullet": "",
 "Enemy": "",
+"Grenade": "",
 "GunItem": "",
 "Hero": "",
 "Item": "",
+"Rocket": "",
+"Spider": "",
 "Weapon": ""
 }
 
@@ -60,8 +78,11 @@ GlobalVariables="*res://Scripts/Load/Global_variables.gd"
 
 [display]
 
-window/vsync/use_vsync=false
-mouse_cursor/custom_image="res://Images/Sprites/Ui/mouse-pointer.png"
+window/size/width=649
+window/size/height=165
+window/size/test_width=1024
+window/size/test_height=600
+mouse_cursor/custom_image="res://Resources/Sprites/Ui/mouse-pointer.png"
 
 [input]
 
@@ -131,11 +152,13 @@ limits/command_queue/multithreading_queue_size_kb=528
 
 common/physics_fps=80
 2d/thread_model=2
-2d/default_gravity=0
+2d/cell_size=100
 2d/default_gravity_vector=Vector2( 0, 0 )
 
 [rendering]
 
 threads/thread_model=2
 threads/thread_safe_bvh=true
-quality/filters/anisotropic_filter_level=1
+2d/options/use_software_skinning=false
+batching/options/single_rect_fallback=true
+batching/parameters/max_join_item_commands=25
