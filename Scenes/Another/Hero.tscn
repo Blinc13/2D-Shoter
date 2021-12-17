@@ -1,33 +1,33 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/Sprites/HeroSprite/Res/HeroAnimation.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Objects/Hero.gd" type="Script" id=2]
 [ext_resource path="res://Sounds/Weapons/fire.ogg" type="AudioStream" id=3]
 [ext_resource path="res://Scenes/Weapons/Guns/Crocogun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Resources/Sprites/Ui/guns/Crocogun.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.9551, 7.86408 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 6, 6 )
+extents = Vector2( 3, 5 )
 
 [node name="Hero" type="KinematicBody2D" groups=["Entity"]]
 script = ExtResource( 2 )
-health = 300.0
 dsTime = 0.05
 dsRelTime = 3.0
 
-[node name="Weapons" type="Node2D" parent="."]
+[node name="Drawing" type="Node2D" parent="."]
 
-[node name="Weapon" parent="Weapons" instance=ExtResource( 4 )]
+[node name="Weapons" type="Node2D" parent="Drawing"]
+
+[node name="Weapon" parent="Drawing/Weapons" instance=ExtResource( 4 )]
 frames = null
 relTime = 4.0
-p = {
-0: 5
-}
 bullet_boost = 1.0
+uiIcon = ExtResource( 5 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Drawing"]
 frames = ExtResource( 1 )
 animation = "Run"
 
@@ -53,7 +53,6 @@ shape = SubResource( 2 )
 
 [node name="SoundPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 3 )
-volume_db = -2.761
 
 [node name="Timer" type="Timer" parent="."]
 

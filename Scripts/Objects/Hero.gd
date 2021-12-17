@@ -4,27 +4,37 @@ class_name Hero
 
 var Grenade=preload("res://Scenes/Weapons/Shells/Grenade.tscn")
 
-export(float) var speed=150
-export(float) var health=100
+export(float) var movSpeed=150
 export(float) var dsTime = 0.3
 export(float) var dsRelTime = 1
 
 var velocity: Vector2
 var firePos: Vector2
-onready var weapon
 var WeaponIndex:int
 var ChReload:float
 var dsReload:float
 var dash:float
+var health:float=GlobalVariables.gameSetUp["Game"]["MaxPlayerHealth"]
+var speed:float=movSpeed*GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
+
+onready var weapon
+onready var WeaponsList=$Drawing/Weapons
+onready var DrawingObj=$Drawing
+onready var AnimationObj=$Drawing/AnimatedSprite
+onready var SoundObj=$SoundPlayer
+onready var Cam=$Camera2D
 
 signal HealthChanged(value)
 signal Dead()
 signal WeaponChanged(obj)
 signal AmmoChanged(value)
+signal HeroInit(Hero)
 
 func _ready():
-	$SoundPlayer.volume_db=GlobalVariables.variables["Sounds"]
-	weapon=$Weapons.get_child(0)
+	SoundObj.volume_db=GlobalVariables.variables["Sounds"]
+	weapon=WeaponsList.get_child(0)
+	speed*=GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
+	emit_signal("HeroInit",self)
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -35,26 +45,17 @@ func _input(event):
 		elif event.axis==JOY_AXIS_3:
 			firePos.y=event.axis_value
 		firePos=firePos.normalized()
-	$Camera2D.offset_h=firePos.x/3
-	$Camera2D.offset_v=firePos.y/3
+	Cam.offset_h=firePos.x/3
+	Cam.offset_v=firePos.y/3
+	DrawingObj.rotation=firePos.angle()
 
 func _process(delta:float):
 	dsReload+=delta
 	ChReload+=delta
-	velocity=Vector2()
-	if Input.is_action_pressed("Up"):
-		velocity.y-=1
-	if Input.is_action_pressed("Down"):
-		velocity.y+=1
-	if Input.is_action_pressed("Left"):
-		velocity.x-=1
-		$AnimatedSprite.flip_h=true
-	if Input.is_action_pressed("Right"):
-		velocity.x+=1
-		$AnimatedSprite.flip_h=false
+	velocity=Input.get_vector("Left","Right","Up","Down")
 	
 	if Input.is_action_pressed("Fire") and weapon.reloaded:
-		$SoundPlayer.play(0)
+		SoundObj.play(0)
 		weapon.fire(firePos,position+firePos*40)
 	
 	if Input.is_action_pressed("Grenade") and weapon.altReloaded:
@@ -63,12 +64,12 @@ func _process(delta:float):
 	if Input.is_action_pressed("ChWeapon") and ChReload>0.5:
 		WeaponIndex+=1
 		ChReload=0
-		if WeaponIndex>=$Weapons.get_child_count():
+		if WeaponIndex>=WeaponsList.get_child_count():
 			WeaponIndex=0
-		weapon=$Weapons.get_child(WeaponIndex)
-		emit_signal("WeaponChanged")
+		weapon=WeaponsList.get_child(WeaponIndex)
+		emit_signal("WeaponChanged",weapon)
 	
-	$AnimatedSprite.playing=velocity.x!=0
+	AnimationObj.playing=velocity.x!=0
 	move_and_slide(velocity.normalized()*speed*(1+dash))
 	dash()
 

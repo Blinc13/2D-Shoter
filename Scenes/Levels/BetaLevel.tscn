@@ -119,6 +119,7 @@ collision_layer = 3
 collision_mask = 3
 space_override = 3
 gravity_point = true
+gravity = 774.404
 linear_damp = 50.947
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -136,11 +137,10 @@ position = Vector2( 265, -95 )
 texture = ExtResource( 8 )
 relTime = 5.0
 
+[node name="Control" parent="." instance=ExtResource( 10 )]
+
 [node name="Hero" parent="." instance=ExtResource( 9 )]
 position = Vector2( 24, 235 )
-
-[node name="Control" parent="." instance=ExtResource( 10 )]
-HeroNodePath = NodePath("../Hero")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 4 )
@@ -164,3 +164,5 @@ shape = SubResource( 5 )
 [connection signal="used" from="CrocogunItem" to="." method="_on_CrocogunItem_used"]
 [connection signal="Dead" from="Hero" to="." method="_on_Hero_Dead"]
 [connection signal="HealthChanged" from="Hero" to="Control" method="HealthChanged"]
+[connection signal="HeroInit" from="Hero" to="Control" method="init"]
+[connection signal="WeaponChanged" from="Hero" to="Control" method="WeaponChanged"]

@@ -1,8 +1,8 @@
 extends Weapon
 
 export(float) var bullet_boost
+export(Texture) var uiIcon
 export(PackedScene) var Bullet
-export(Texture) var uiTexture
 
 func fire_event(vel:Vector2,pos:Vector2):
 	var node=Bullet.instance()

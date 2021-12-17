@@ -6,7 +6,6 @@ class_name Weapon
 
 export(float) var relTime
 export(float) var altRelTime
-export(Dictionary) var p
 
 var rel:float
 var altRel:float

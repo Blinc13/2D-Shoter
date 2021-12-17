@@ -1,17 +1,34 @@
 extends CanvasLayer
 
-export(NodePath) var HeroNodePath
-var hero
+onready var HealthBar=$Control/HBoxContainer/HBoxContainer/VBoxContainer/ProgressBar
+onready var WeaponIcon=$Control/HBoxContainer/WeaponIcon
+onready var Aim=$AnimatedSprite
 
-func _ready():
-	hero=get_node(HeroNodePath)
+var weapon:Weapon
+var hero:Hero
+
+func _init():
+	set_process(false)
+
+func init(Hero):
+	hero=Hero
+	weapon=Hero.weapon
+	
+	HealthBar.max_value=hero.health
+	HealthBar.value=hero.health
+	
+	set_process(true)
 
 func _input(event):
 	if event is InputEventMouseMotion:
-		$AnimatedSprite.position=get_viewport().get_mouse_position()
+		Aim.position=get_viewport().get_mouse_position()
 
 func _process(delta):
-	$AnimatedSprite.frame=hero.weapon.rel/hero.weapon.relTime*5
+	Aim.frame=weapon.rel/weapon.relTime*5
 
 func HealthChanged(value):
-	$Label.text=str(value)
+	HealthBar.value=value
+
+func WeaponChanged(NewWeapon):
+	weapon=NewWeapon
+	WeaponIcon.texture=weapon.uiIcon

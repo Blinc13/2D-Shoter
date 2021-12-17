@@ -7,6 +7,10 @@ export(float) var explTime=6
 
 var expload=false
 
+onready var AnimationObj=$AnimatedSprite
+onready var DamageArea=$DamageArea
+onready var SoundObj=$SoundPlayer
+
 func _ready():
 	$Timer.start(explTime)
 
@@ -19,16 +23,16 @@ func effect(obj):
 
 func _on_Timer_timeout():
 	if !expload:
-		$AnimatedSprite.play("Explosion")
-		$AnimatedSprite.global_rotation=0
+		AnimationObj.play("Explosion")
+		AnimationObj.global_rotation=0
 		linear_velocity=Vector2(0,0)
 		angular_velocity=0
 		
 		
-		effect($DamageArea.get_overlapping_bodies())
+		effect(DamageArea.get_overlapping_bodies())
 		$Timer.start(1)
 		
-		$SoundPlayer.play(0)
+		SoundObj.play(0)
 		set_collision_mask_bit(0,false)
 		expload=true
 	else:
