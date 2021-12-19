@@ -14,4 +14,4 @@ func use_item(obj):
 		if obj.get_child(0).get_node_or_null(Name) != null:
 			pass
 		else:
-			obj.get_child(0).add_child(Gun.instance())
+			obj.WeaponsList.add_child(Gun.instance())

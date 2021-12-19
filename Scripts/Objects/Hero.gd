@@ -31,7 +31,6 @@ signal AmmoChanged(value)
 signal HeroInit(Hero)
 
 func _ready():
-	SoundObj.volume_db=GlobalVariables.variables["Sounds"]
 	weapon=WeaponsList.get_child(0)
 	speed*=GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
 	emit_signal("HeroInit",self)
@@ -55,7 +54,6 @@ func _process(delta:float):
 	velocity=Input.get_vector("Left","Right","Up","Down")
 	
 	if Input.is_action_pressed("Fire") and weapon.reloaded:
-		SoundObj.play(0)
 		weapon.fire(firePos,position+firePos*40)
 	
 	if Input.is_action_pressed("Grenade") and weapon.altReloaded:
@@ -64,9 +62,11 @@ func _process(delta:float):
 	if Input.is_action_pressed("ChWeapon") and ChReload>0.5:
 		WeaponIndex+=1
 		ChReload=0
+		weapon.visible=false
 		if WeaponIndex>=WeaponsList.get_child_count():
 			WeaponIndex=0
 		weapon=WeaponsList.get_child(WeaponIndex)
+		weapon.visible=true
 		emit_signal("WeaponChanged",weapon)
 	
 	AnimationObj.playing=velocity.x!=0

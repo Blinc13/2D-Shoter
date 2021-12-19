@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Objects/Items/Item.gd"
 }, {
+"base": "Node2D",
+"class": "Level",
+"language": "GDScript",
+"path": "res://Scripts/Load/BetaLevel.gd"
+}, {
 "base": "RigidBody2D",
 "class": "Rocket",
 "language": "GDScript",
@@ -61,6 +66,7 @@ _global_script_class_icons={
 "GunItem": "",
 "Hero": "",
 "Item": "",
+"Level": "",
 "Rocket": "",
 "Spider": "",
 "Weapon": ""
@@ -78,10 +84,6 @@ GlobalVariables="*res://Scripts/Load/Global_variables.gd"
 
 [display]
 
-window/size/width=649
-window/size/height=165
-window/size/test_width=1024
-window/size/test_height=600
 mouse_cursor/custom_image="res://Resources/Sprites/Ui/mouse-pointer.png"
 
 [input]
