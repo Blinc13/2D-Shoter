@@ -1,9 +1,10 @@
 extends Node2D
+class_name Level
 
-func _ready():
-	var node=preload("res://Scenes/Another/Hero.tscn").instance()
-	var nod=preload("res://Scenes/Another/GameUi.tscn").instance()
-	nod.init(node)
-	add_child(node)
-	node.add_child(nod)
-	node.position=Vector2(50,0)
+export(float) var MexHeroHealth:float=100
+
+func _on_Hero_Dead():
+	get_tree().quit(0)
+
+func _on_CrocogunItem_used():
+	print("item used")

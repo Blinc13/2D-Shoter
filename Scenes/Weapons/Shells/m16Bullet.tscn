@@ -1,0 +1,44 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Resources/Sprites/Bullet/Res/BulletAnimation.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/Objects/Shells/Bullets/m16.gd" type="Script" id=2]
+[ext_resource path="res://Resources/Effects/RicochetParticles.tres" type="Material" id=3]
+
+[sub_resource type="PhysicsMaterial" id=2]
+friction = 0.4
+bounce = 1.0
+
+[node name="Bullet" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 2
+mass = 1.34898
+physics_material_override = SubResource( 2 )
+contacts_reported = 1
+contact_monitor = true
+can_sleep = false
+linear_damp = 0.3
+script = ExtResource( 2 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 1 )
+animation = "Fire"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 0.2, -0.2 )
+scale = Vector2( 1.125, 1.125 )
+polygon = PoolVector2Array( -1.06667, -0.711111, -1.06667, 1.06667, 0.711111, 0.177778 )
+
+[node name="Particles" type="Particles2D" parent="."]
+emitting = false
+amount = 40
+lifetime = 0.6
+one_shot = true
+speed_scale = 0.5
+explosiveness = 1.0
+randomness = 1.0
+local_coords = false
+process_material = ExtResource( 3 )
+
+[connection signal="body_shape_entered" from="." to="." method="Ricochet_beg"]
+[connection signal="body_shape_exited" from="." to="." method="Ricochet_end"]
+[connection signal="animation_finished" from="Sprite" to="." method="queue_free"]
