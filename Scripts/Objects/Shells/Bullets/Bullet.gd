@@ -20,7 +20,7 @@ func bullet_update(delta):
 		set_physics_process(false)
 	set_linear_damp(speed*dfactor / linear_velocity.length())
 
-func damage(vel:Vector2):
+func damage(vel:Vector2=Vector2(0,0)):
 	return int(damage*(linear_velocity-vel).length()/2)
 
 func Ricochet_beg(body_rid, body, body_shape_index, local_shape_index):

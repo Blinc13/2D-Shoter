@@ -8,12 +8,14 @@ onready var SoundObj=$AudioStreamPlayer2D
 
 func _ready():
 	SoundObj.volume_db=GlobalVariables.variables["Sounds"]
+	print(position)
 
 func fire_event(vel:Vector2,pos:Vector2):
 	var node=Bullet.instance()
 	node.start(vel,pos,bullet_boost)
 	get_node("/root/Level").add_child(node)
 	SoundObj.play(0)
+	print(position)
 
 func _process(delta):
 	frame=rel/relTime*5

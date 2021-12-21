@@ -17,11 +17,10 @@ var dash:float
 var health:float=GlobalVariables.gameSetUp["Game"]["MaxPlayerHealth"]
 var speed:float=movSpeed*GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
 
-onready var weapon
 onready var WeaponsList=$Drawing/Weapons
+onready var weapon=WeaponsList.get_child(0)
 onready var DrawingObj=$Drawing
 onready var AnimationObj=$Drawing/AnimatedSprite
-onready var SoundObj=$SoundPlayer
 onready var Cam=$Camera2D
 
 signal HealthChanged(value)
@@ -31,7 +30,6 @@ signal AmmoChanged(value)
 signal HeroInit(Hero)
 
 func _ready():
-	weapon=WeaponsList.get_child(0)
 	speed*=GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
 	emit_signal("HeroInit",self)
 
@@ -60,17 +58,11 @@ func _process(delta:float):
 		weapon.altFire(firePos,position+firePos*10)
 	
 	if Input.is_action_pressed("ChWeapon") and ChReload>0.5:
-		WeaponIndex+=1
-		ChReload=0
-		weapon.visible=false
-		if WeaponIndex>=WeaponsList.get_child_count():
-			WeaponIndex=0
-		weapon=WeaponsList.get_child(WeaponIndex)
-		weapon.visible=true
-		emit_signal("WeaponChanged",weapon)
+		changeWeapon()
 	
 	AnimationObj.playing=velocity.x!=0
-	move_and_slide(velocity.normalized()*speed*(1+dash))
+	move_and_slide(velocity*speed*(1+dash))
+	move_and_slide(firePos*speed*dash)
 	dash()
 
 func dash():
@@ -78,6 +70,16 @@ func dash():
 		dash = 10
 		$Timer.start(dsTime)
 		dsReload = 0 
+
+func changeWeapon():
+	WeaponIndex+=1
+	ChReload=0
+	weapon.visible=false
+	if WeaponIndex>=WeaponsList.get_child_count():
+		WeaponIndex=0
+	weapon=WeaponsList.get_child(WeaponIndex)
+	weapon.visible=true
+	emit_signal("WeaponChanged",weapon)
 
 func _on_Timer_timeout():
 	dash = 0

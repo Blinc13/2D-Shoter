@@ -38,3 +38,8 @@ func altFire(vel:Vector2,pos:Vector2):
 	altRel=0
 	altReloaded=false
 	alt_fire_event(vel,pos)
+
+func isReloaded():
+	return reloaded
+func altIsReloaded():
+	return altReloaded
