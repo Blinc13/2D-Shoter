@@ -135,7 +135,6 @@ UnitScene = ExtResource( 6 )
 [node name="CrocogunItem" parent="." instance=ExtResource( 7 )]
 position = Vector2( 265, -95 )
 texture = ExtResource( 8 )
-relTime = 5.0
 
 [node name="Control" parent="." instance=ExtResource( 10 )]
 
@@ -161,7 +160,6 @@ gravity = 525.409
 position = Vector2( 0, -0.5 )
 shape = SubResource( 5 )
 
-[connection signal="used" from="CrocogunItem" to="." method="_on_CrocogunItem_used"]
 [connection signal="Dead" from="Hero" to="." method="_on_Hero_Dead"]
 [connection signal="HealthChanged" from="Hero" to="Control" method="HealthChanged"]
 [connection signal="HeroInit" from="Hero" to="Control" method="init"]

@@ -7,7 +7,6 @@
 [ext_resource path="res://Sounds/Weapons/fire.ogg" type="AudioStream" id=5]
 
 [node name="Crocogun" type="AnimatedSprite"]
-visible = false
 frames = ExtResource( 2 )
 animation = "Fire"
 script = ExtResource( 1 )

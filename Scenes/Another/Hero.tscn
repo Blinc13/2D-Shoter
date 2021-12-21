@@ -12,19 +12,19 @@ extents = Vector2( 5.9551, 7.86408 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 3, 5 )
 
-[node name="Hero" type="KinematicBody2D" groups=["Entity"]]
+[node name="Hero" type="KinematicBody2D" groups=["Entity", "Hero"]]
 script = ExtResource( 2 )
 dsTime = 0.05
-dsRelTime = 3.0
 
 [node name="Drawing" type="Node2D" parent="."]
 
 [node name="Weapons" type="Node2D" parent="Drawing"]
-position = Vector2( 0, -5 )
+position = Vector2( 4, -4 )
 rotation = 1.5708
+scale = Vector2( 0.7, 0.7 )
 
 [node name="Weapon" parent="Drawing/Weapons" instance=ExtResource( 4 )]
-visible = true
+frame = 5
 relTime = 4.0
 bullet_boost = 1.0
 uiIcon = ExtResource( 5 )
@@ -37,7 +37,6 @@ frames = ExtResource( 1 )
 animation = "Run"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( 2.53518e-06, -1 )
 rotation = -3.14159
 scale = Vector2( 1.00754, -0.762963 )
 shape = SubResource( 1 )
@@ -53,7 +52,6 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, -1 )
 shape = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
