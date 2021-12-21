@@ -1,4 +1,5 @@
 #pragma once
+#include <Godot.hpp>
 #include <Item.hpp>
 #include <PackedScene.hpp>
 #include <Sprite.hpp>
