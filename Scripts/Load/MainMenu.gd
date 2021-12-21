@@ -1,10 +1,12 @@
 extends Control
+
 func _ready():
 	$TabContainer/Audio/AudioVolume.value=GlobalVariables.variables["Sounds"]
 
 func _on_PlayBtn_pressed():
 	hide()
 	get_tree().root.add_child(load("res://Scenes/Levels/BetaLevel.tscn").instance())
+
 func _on_SettingsBtn_pressed():
 	$TabContainer.visible = !$TabContainer.visible
 
