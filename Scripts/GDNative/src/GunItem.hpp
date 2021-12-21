@@ -1,7 +1,7 @@
 #pragma once
 #include <Item.hpp>
 #include <PackedScene.hpp>
-
+#include <Sprite.hpp>
 
 namespace godot
 {
@@ -10,15 +10,15 @@ class GunItem:public Item
 {
 	GODOT_SUBCLASS(GunItem,Item)
 private:
-	PackedScene weapon;
+	Ref<PackedScene> weapon;
 public:
-	void register_methods();
+	static void _register_methods();
 	void _init();
 	
 	GunItem();
 	~GunItem();
 	
-	void use_item(Node*);
+	bool use_item(Node*);
 };
 
 }

@@ -10,8 +10,8 @@ namespace godot
 class Item:public Sprite
 {
 	GODOT_CLASS(Item,Sprite)
-private:
-	float relTime;
+protected:
+	float relTime=10.0F;
 	
 	Area2D *area;
 	Timer	 *timer;
@@ -24,7 +24,8 @@ public:
 	
 	void _ready();
 	
-	void use_item(Variant);
+	
+	virtual bool use_item(Node*);
 	void Activated(Variant);
 	void TimeOut();
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include "Item.hpp"
+#include <iostream>
 
 using namespace godot;
 
@@ -10,9 +11,9 @@ void Item::_register_methods()
 	register_method("TimeOut",&Item::TimeOut);
 	register_method("use_item",&Item::use_item);
 	
-	register_property<Item,float>((char*)"Rel Time",&Item::relTime,10.0F);
+	register_property<Item,float>("RelTime",&Item::relTime,10.0F);
 	
-	register_signal<Item>((char*)"used");
+	register_signal<Item>("used");
 }
 
 Item::Item()
@@ -32,7 +33,7 @@ void Item::_ready()
 
 void Item::Activated(Variant obj)
 {
-	area->set_deferred("monitoring",false);
+	area->set_deferred("monitoring",use_item(cast_to<Node>(static_cast<Object*>(obj))));
 	timer->start(relTime);
 	emit_signal("used");
 }
@@ -42,5 +43,7 @@ void Item::TimeOut()
 	area->set_deferred("monitoring",true);
 }
 
-void Item::use_item(Variant obj)
-{}
+bool Item::use_item(Node *obj)
+{
+	return false;
+}
