@@ -31,7 +31,6 @@ uiIcon = ExtResource( 5 )
 Bullet = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Drawing"]
-position = Vector2( 6.55651e-07, -1 )
 scale = Vector2( 0.7, 0.7 )
 frames = ExtResource( 1 )
 animation = "Run"
