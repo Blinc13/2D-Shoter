@@ -1,16 +1,17 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scripts/Load/BetaLevel.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Textures/Map/Data/MapTiles.tres" type="TileSet" id=3]
 [ext_resource path="res://Resources/Sprites/Objects/Res/ObjectsTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Scenes/Another/UnitSpawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Enemys/Spider.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Enemys/Hornet.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Items/GunItem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Resources/Sprites/Ui/guns/Crocogun.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/Another/Hero.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Another/GameUi.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Weapons/Shells/Rocket.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Enemys/Spider.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 738.5, 10 )
@@ -129,8 +130,13 @@ shape = SubResource( 3 )
 [node name="UnitSpawner" parent="." instance=ExtResource( 5 )]
 position = Vector2( 192, 142 )
 Delay = 1.0
-MaxUnits = 1
+MaxUnits = 3
 UnitScene = ExtResource( 6 )
+
+[node name="UnitSpawner2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 365, -13 )
+Delay = 1.0
+UnitScene = ExtResource( 12 )
 
 [node name="CrocogunItem" parent="." instance=ExtResource( 7 )]
 position = Vector2( 265, -95 )
@@ -146,7 +152,7 @@ environment = SubResource( 4 )
 
 [node name="Rocket" parent="." instance=ExtResource( 11 )]
 position = Vector2( -5, 226 )
-rotation = -3.08217
+rotation = -3.14159
 
 [node name="Area2D2" type="Area2D" parent="."]
 position = Vector2( -104, 225 )
