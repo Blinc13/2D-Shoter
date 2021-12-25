@@ -52,7 +52,7 @@ func _process(delta:float):
 	velocity=Input.get_vector("Left","Right","Up","Down")
 	
 	if Input.is_action_pressed("Fire") and weapon.reloaded:
-		weapon.fire(firePos,position+firePos*40)
+		weapon.fire(firePos,position+firePos*10)
 	
 	if Input.is_action_pressed("Grenade") and weapon.altReloaded:
 		weapon.altFire(firePos,position+firePos*10)

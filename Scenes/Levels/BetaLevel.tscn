@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Scripts/Load/BetaLevel.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scenes/Another/GameUi.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Weapons/Shells/Rocket.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Enemys/Spider.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Weapons/Guns/m16.tscn" type="PackedScene" id=13]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 738.5, 10 )
@@ -141,6 +142,7 @@ UnitScene = ExtResource( 12 )
 [node name="CrocogunItem" parent="." instance=ExtResource( 7 )]
 position = Vector2( 265, -95 )
 texture = ExtResource( 8 )
+"Weapon scene" = ExtResource( 13 )
 
 [node name="Control" parent="." instance=ExtResource( 10 )]
 

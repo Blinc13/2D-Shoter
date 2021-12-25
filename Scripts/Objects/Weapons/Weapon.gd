@@ -1,11 +1,10 @@
 extends AnimatedSprite
 
-enum Ammo{m16,ener}
-
 class_name Weapon
 
 export(float) var relTime
 export(float) var altRelTime
+export(Texture) var uiIcon
 
 var rel:float
 var altRel:float

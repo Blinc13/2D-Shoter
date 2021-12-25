@@ -10,7 +10,7 @@
 extents = Vector2( 5.9551, 7.86408 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 3, 5 )
+extents = Vector2( 3, 4 )
 
 [node name="Hero" type="KinematicBody2D" groups=["Entity", "Hero"]]
 script = ExtResource( 2 )
@@ -26,8 +26,8 @@ scale = Vector2( 0.7, 0.7 )
 [node name="Weapon" parent="Drawing/Weapons" instance=ExtResource( 4 )]
 frame = 5
 relTime = 4.0
-bullet_boost = 1.0
 uiIcon = ExtResource( 5 )
+bullet_boost = 1.0
 Bullet = ExtResource( 6 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Drawing"]

@@ -16,8 +16,8 @@ func start(point:Vector2,pos:Vector2,spBost=1.0):
 
 func bullet_update(delta):
 	if linear_velocity.length()<4:
-		$Sprite.play("Destroy")
-		set_physics_process(false)
+		destroy()
+		queue_free()
 	set_linear_damp(speed*dfactor / linear_velocity.length())
 
 func damage(vel:Vector2=Vector2(0,0)):
@@ -29,5 +29,5 @@ func Ricochet_beg(body_rid, body, body_shape_index, local_shape_index):
 	node.start(global_position,Physics2DServer.body_get_direct_state(get_rid()).get_contact_local_normal(0),
 	linear_velocity.length()/10)
 
-func Ricochet_end(body_rid, body, body_shape_index, local_shape_index):
+func destroy():
 	pass
