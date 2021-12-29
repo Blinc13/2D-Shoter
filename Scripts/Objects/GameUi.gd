@@ -12,9 +12,9 @@ func _init():
 
 func init(Hero):
 	hero=Hero
-	weapon=Hero.weapon
+	WeaponChanged(Hero.weapon)
 	
-	HealthBar.max_value=hero.health
+	HealthBar.max_value=hero.maxHealth
 	HealthBar.value=hero.health
 	
 	set_process(true)

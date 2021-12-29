@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scripts/Objects/Weapons/RocketLauncher.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/RocketLauncher/Res/RocketLauncher.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Resources/Sprites/Ui/guns/RocketLauncher.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Weapons/Shells/Rocket.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Sounds/Weapons/RocketLauncerFire.ogg" type="AudioStream" id=5]
+
+[node name="RocketLauncher" type="AnimatedSprite"]
+visible = false
+frames = ExtResource( 2 )
+animation = "Reload"
+script = ExtResource( 1 )
+relTime = 6.0
+uiIcon = ExtResource( 3 )
+Shell = ExtResource( 4 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )

@@ -130,6 +130,15 @@ linear_damp = 50.947
 position = Vector2( -4, 4 )
 shape = SubResource( 3 )
 
+[node name="FirstAidKit" parent="." instance=ExtResource( 15 )]
+position = Vector2( 398, -66 )
+Heal = 14.0
+RelTime = 5.0
+
+[node name="Gun" parent="." instance=ExtResource( 7 )]
+position = Vector2( 454, 22 )
+texture = ExtResource( 8 )
+
 [node name="UnitSpawner" parent="." instance=ExtResource( 5 )]
 position = Vector2( 192, 142 )
 Delay = 10.0
@@ -170,15 +179,6 @@ gravity = 525.409
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
 position = Vector2( 0, -0.5 )
 shape = SubResource( 5 )
-
-[node name="Gun" parent="." instance=ExtResource( 7 )]
-position = Vector2( 454, 22 )
-texture = ExtResource( 8 )
-
-[node name="FirstAidKit" parent="." instance=ExtResource( 15 )]
-position = Vector2( 398, -66 )
-Heal = 14.0
-RelTime = 5.0
 
 [connection signal="Dead" from="Hero" to="." method="_on_Hero_Dead"]
 [connection signal="HealthChanged" from="Hero" to="Control" method="HealthChanged"]

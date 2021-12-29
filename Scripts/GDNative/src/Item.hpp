@@ -26,6 +26,7 @@ public:
 	
 	
 	virtual bool use_item(Node*);
+	virtual void effect();
 	void Activated(Variant);
 	void TimeOut();
 };

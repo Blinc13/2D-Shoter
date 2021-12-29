@@ -14,9 +14,9 @@ onready var SoundObj=$SoundPlayer
 func _ready():
 	$Timer.start(explTime)
 
-func start(vel:Vector2,pos:Vector2):
+func start(vel:Vector2,pos:Vector2,boost:float):
 	position=pos
-	linear_velocity=vel*speed
+	linear_velocity=vel*(speed*boost)
 
 func effect(obj):
 	pass

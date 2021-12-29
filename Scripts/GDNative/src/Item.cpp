@@ -34,6 +34,7 @@ void Item::_ready()
 void Item::Activated(Variant obj)
 {
 	area->set_deferred("monitoring",use_item(cast_to<Node>(static_cast<Object*>(obj))));
+	effect();
 	timer->start(relTime);
 	emit_signal("used");
 }
@@ -44,6 +45,6 @@ void Item::TimeOut()
 }
 
 bool Item::use_item(Node *obj)
-{
-	return false;
-}
+{return false;}
+void Item::effect()
+{}

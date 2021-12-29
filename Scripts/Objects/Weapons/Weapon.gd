@@ -11,16 +11,15 @@ var altRel:float
 var reloaded:bool
 var altReloaded:bool
 
-func _init():
-	position=Vector2(0,10)
-
 func _process(delta):
 	rel+=delta
 	altRel+=delta
 	if rel>=relTime:
 		reloaded=true
+		reloaded()
 	if altRel>=altRelTime:
 		altReloaded=true
+		alt_reloaded()
 
 func fire_event(vel:Vector2,pos:Vector2):
 	pass
@@ -42,3 +41,8 @@ func isReloaded():
 	return reloaded
 func altIsReloaded():
 	return altReloaded
+
+func reloaded():
+	pass
+func alt_reloaded():
+	pass

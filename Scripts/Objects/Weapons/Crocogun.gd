@@ -1,18 +1,10 @@
-extends Weapon
+extends Gun
 
-export(float) var bullet_boost
-export(PackedScene) var Bullet
-
-onready var SoundObj=$AudioStreamPlayer2D
-
-func _ready():
-	SoundObj.volume_db=GlobalVariables.variables["Sounds"]
+onready var RelParticles=$Particles2D
 
 func fire_event(vel:Vector2,pos:Vector2):
-	var node=Bullet.instance()
-	node.start(vel,pos,bullet_boost)
-	get_node("/root/Level").add_child(node)
-	SoundObj.play(0)
+	Fire(Shell.instance(),vel,pos)
+	RelParticles.emitting=false
 
-func _process(delta):
-	frame=rel/relTime*5
+func reloaded():
+	RelParticles.emitting=true

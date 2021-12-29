@@ -8,11 +8,11 @@ export(float) var dfactor=0.5
 
 export(PackedScene) var ricochet_eff=preload("res://Scenes/Effects/RecoshetParticles.tscn")
 
-func start(point:Vector2,pos:Vector2,spBost=1.0):
+func start(MovVec:Vector2,pos:Vector2,spBost=1.0):
 	speed*=spBost
-	linear_velocity=point*(speed)
+	linear_velocity=MovVec*(speed)
 	position=pos
-	rotation=point.angle()
+	rotation=MovVec.angle()
 
 func bullet_update(delta):
 	if linear_velocity.length()<4:
