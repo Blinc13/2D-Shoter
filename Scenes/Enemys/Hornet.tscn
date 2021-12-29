@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Objects/Enemys/Hornet.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/Hornet/Res/HornetAnimation.tres" type="SpriteFrames" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8.5 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 7.5, 8 )
+
+[node name="Hornet" type="KinematicBody2D" groups=["Entity"]]
+collision_mask = 0
+script = ExtResource( 1 )
+health = 50.0
+attack_radius = 8.0
+speed = 80.0
+damag = 30.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "run"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -1.5 )
+shape = SubResource( 1 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -0.5, -2 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="PathUpdateTimer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="body_entered" from="Hitbox" to="." method="HitboxAct"]
+[connection signal="timeout" from="Timer" to="." method="queue_free"]
+[connection signal="timeout" from="PathUpdateTimer" to="." method="new_path"]
