@@ -26,6 +26,7 @@ _data = [ Vector2( 0, 0.954545 ), 0.0, 0.69697, 0, 0, Vector2( 1, 0.354545 ), -2
 curve = SubResource( 6 )
 
 [sub_resource type="ParticlesMaterial" id=8]
+resource_name = "HealParticles"
 lifetime_randomness = 1.0
 emission_shape = 2
 emission_box_extents = Vector3( 10, 20, 1 )
