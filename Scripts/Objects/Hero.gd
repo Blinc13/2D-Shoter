@@ -14,7 +14,8 @@ var WeaponIndex:int
 var ChReload:float
 var dsReload:float
 var dash:float
-var health:float=GlobalVariables.gameSetUp["Game"]["MaxPlayerHealth"]
+var maxHealth:float=GlobalVariables.gameSetUp["Game"]["MaxPlayerHealth"]
+var health:float=maxHealth
 var speed:float=movSpeed*GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
 
 onready var WeaponsList=$Drawing/Weapons
@@ -31,6 +32,8 @@ signal HeroInit(Hero)
 
 func _ready():
 	speed*=GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
+	print(WeaponsList.position)
+	print(weapon.position)
 	emit_signal("HeroInit",self)
 
 func _input(event):
@@ -55,21 +58,19 @@ func _process(delta:float):
 		weapon.fire(firePos,position+firePos*10)
 	
 	if Input.is_action_pressed("Grenade") and weapon.altReloaded:
-		weapon.altFire(firePos,position+firePos*10)
+		weapon.altFire(firePos,position+firePos*6)
 	
 	if Input.is_action_pressed("ChWeapon") and ChReload>0.5:
 		changeWeapon()
 	
-	AnimationObj.playing=velocity.x!=0
-	move_and_slide(velocity*speed*(1+dash))
-	move_and_slide(firePos*speed*dash)
-	dash()
-
-func dash():
 	if Input.is_action_pressed("Dash") and dsReload >= dsRelTime:
 		dash = 10
 		$Timer.start(dsTime)
-		dsReload = 0 
+		dsReload = 0
+	
+	AnimationObj.playing=velocity.x!=0
+	move_and_slide(velocity*speed*(1+dash))
+	move_and_slide(velocity*speed*dash)
 
 func changeWeapon():
 	WeaponIndex+=1
