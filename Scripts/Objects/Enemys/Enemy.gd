@@ -11,9 +11,9 @@ export(float) var dead_visible_time=10
 onready var target=$"/root/Level/Hero"
 onready var nav=$"/root/Level/Nav"
 
-onready var AnimationObj=$AnimatedSprite
-onready var TimerObj=$Timer
-onready var Hitbox=$Hitbox
+onready var AnimationObj:AnimatedSprite=$AnimatedSprite
+onready var TimerObj:Timer=$Timer
+onready var Hitbox:Area2D=$Hitbox
 
 var pos:int
 var attacking:bool
@@ -33,7 +33,6 @@ func move_to_target(distance):
 		var new_pos=pos_g.linear_interpolate(path[pos],distance/pos_g.distance_to(path[pos]))
 		AnimationObj.flip_h=pos_g.x>new_pos.x
 		set_global_position(new_pos)
-		attack()
 
 func new_path():
 	path=nav.get_simple_path(get_global_position(),target.position)
@@ -52,11 +51,15 @@ func damage(dam:float):
 		TimerObj.start(dead_visible_time)
 		AnimationObj.play("death")
 		
+		AnimationObj.playing=false
+		AnimationObj.frame=rand_range(0,AnimationObj.frames.get_frame_count("death"))
+		
 		Hitbox.set_deferred("monitoring",false)
 		set_collision_layer_bit(0,false)
 		
 		set_process(false)
 		death=true
+		death()
 
 
 func HitboxAct(body:Bullet):
@@ -72,3 +75,6 @@ func _on_AnimatedSprite_animation_finished():
 		if global_position.distance_to(target.position)<=attack_radius:
 			target.damage(damag)
 		set_process(true)
+
+func death():
+	pass

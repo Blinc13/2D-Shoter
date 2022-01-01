@@ -18,6 +18,8 @@ func bullet_update(delta):
 	if linear_velocity.length()<4:
 		destroy()
 		queue_free()
+
+func update_damp():
 	set_linear_damp(speed*dfactor / linear_velocity.length())
 
 func damage(vel:Vector2=Vector2(0,0)):

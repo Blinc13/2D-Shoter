@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Objects/Shells/Bullets/Lazer.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/Lazer/Res/Lazer.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Scenes/Effects/LazerCollide.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 3.5, 2.5 )
+
+[node name="LazerShell" type="RigidBody2D" groups=["Bullet"]]
+collision_layer = 2
+collision_mask = 2
+mass = 0.00102041
+gravity_scale = 0.0
+contacts_reported = 1
+contact_monitor = true
+linear_damp = 0.0
+angular_damp = 0.0
+script = ExtResource( 1 )
+damage = 0.05
+dfactor = 0.0
+ricochet_eff = ExtResource( 3 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "Fly"
+frame = 1
+playing = true
+
+[connection signal="body_shape_entered" from="." to="." method="collide"]
+[connection signal="body_shape_entered" from="." to="." method="Ricochet_beg"]

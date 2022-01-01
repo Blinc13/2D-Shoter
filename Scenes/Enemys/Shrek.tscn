@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/Objects/Enemys/Shrek.gd" type="Script" id=1]
+[ext_resource path="res://Resources/Sprites/Shrek/Res/ShrekAnimation.tres" type="SpriteFrames" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7, 7 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 4.5, 4.5 )
+
+[node name="Shrek" type="KinematicBody2D" groups=["Entity"]]
+collision_mask = 0
+script = ExtResource( 1 )
+speed = 60.0
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "run"
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 10, 0 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2( -1.5, -1.5 )
+shape = SubResource( 2 )
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AttackTimer" type="Timer" parent="."]
+autostart = true
+
+[node name="PathTimerUpdate" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="DirCheck" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="body_entered" from="Hitbox" to="." method="HitboxAct"]
+[connection signal="timeout" from="Timer" to="." method="queue_free"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
+[connection signal="timeout" from="PathTimerUpdate" to="." method="new_path"]
+[connection signal="timeout" from="DirCheck" to="." method="_on_DirCheck_timeout"]

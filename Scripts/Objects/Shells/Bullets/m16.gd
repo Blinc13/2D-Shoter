@@ -4,6 +4,7 @@ export(PackedScene) var DestEffect
 
 func _physics_process(delta):
 	bullet_update(delta)
+	update_damp()
 
 
 func destroy():
