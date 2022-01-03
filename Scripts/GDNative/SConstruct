@@ -22,7 +22,7 @@ cpp_library = "libgodot-cpp"
 # only support 64 at this time..
 bits = 64
 
-env.Append(CXXFLAGS='-Wall')
+#env.Append(CXXFLAGS='-Wall')
 
 # Updates the environment with the option variables.
 opts.Update(env)

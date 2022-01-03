@@ -1,20 +1,23 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/Load/BetaLevel.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://Resources/Textures/Map/Data/MapTiles.tres" type="TileSet" id=3]
 [ext_resource path="res://Resources/Sprites/Objects/Res/ObjectsTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Scenes/Another/UnitSpawner.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Scenes/Enemys/Hornet.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Resources/Sprites/Ui/guns/PistolPng.png" type="Texture" id=6]
 [ext_resource path="res://Scenes/Items/GunItem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Resources/Sprites/Ui/guns/Crocogun.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/Another/Hero.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Another/GameUi.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Weapons/Shells/Rocket.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Enemys/Spider.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Weapons/Guns/Pistol.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Weapons/Guns/RocketLauncher.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Resources/Sprites/Ui/guns/RocketLauncher.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Items/FirstAidKit.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Enemys/Spider.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Scenes/Enemys/Shrek.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Scenes/Enemys/Hornet.tscn" type="PackedScene" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 738.5, 10 )
@@ -132,29 +135,37 @@ shape = SubResource( 3 )
 
 [node name="FirstAidKit" parent="." instance=ExtResource( 15 )]
 position = Vector2( 398, -66 )
-Heal = 14.0
-RelTime = 5.0
 
 [node name="Gun" parent="." instance=ExtResource( 7 )]
 position = Vector2( 454, 22 )
 texture = ExtResource( 8 )
 
-[node name="UnitSpawner" parent="." instance=ExtResource( 5 )]
-position = Vector2( 192, 142 )
-Delay = 10.0
-MaxUnits = 1
-UnitScene = ExtResource( 6 )
+[node name="Gun2" parent="." instance=ExtResource( 7 )]
+position = Vector2( 360, -109 )
+texture = ExtResource( 6 )
+"Weapon scene" = ExtResource( 12 )
 
-[node name="UnitSpawner2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 365, -13 )
-Delay = 2.0
-MaxUnits = 2
-UnitScene = ExtResource( 12 )
-
-[node name="CrocogunItem" parent="." instance=ExtResource( 7 )]
+[node name="Gun3" parent="." instance=ExtResource( 7 )]
 position = Vector2( 265, -95 )
 texture = ExtResource( 14 )
 "Weapon scene" = ExtResource( 13 )
+
+[node name="UnitSpawner" parent="." instance=ExtResource( 5 )]
+position = Vector2( 192, 142 )
+Delay = 5.0
+"Max Units" = 1
+"Unit scene" = ExtResource( 17 )
+
+[node name="UnitSpawner2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 268, -11 )
+Delay = 6.0
+"Unit scene" = ExtResource( 16 )
+
+[node name="UnitSpawner3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 343, 121 )
+Delay = 3.0
+"Max Units" = 2
+"Unit scene" = ExtResource( 18 )
 
 [node name="Control" parent="." instance=ExtResource( 10 )]
 
