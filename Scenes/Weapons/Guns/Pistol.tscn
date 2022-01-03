@@ -6,6 +6,7 @@
 [ext_resource path="res://Resources/Sprites/Ui/guns/PistolPng.png" type="Texture" id=4]
 
 [node name="Pistol" type="AnimatedSprite"]
+visible = false
 frames = ExtResource( 2 )
 animation = "Fire"
 script = ExtResource( 1 )
