@@ -27,7 +27,6 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 2 )
 animation = "Fly"
-frame = 1
 playing = true
 
 [connection signal="body_shape_entered" from="." to="." method="collide"]
