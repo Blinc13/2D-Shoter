@@ -21,7 +21,8 @@ var gameSetUp={
 	},
 	"Server":
 	{
-		"MaxPlayers":8
+		"MaxPlayers":4,
+		"Port":8086
 	}
 }
 

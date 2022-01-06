@@ -6,7 +6,8 @@ var Ip:String="192.168.0.103"
 var Net=NetworkedMultiplayerENet.new()
 
 var PlayerStateCol={}
-var Ids:Array=[1]
+var Ids:Array
+
 func _init():
 	set_process(false)
 
@@ -39,22 +40,16 @@ func _player_connected(id):
 	print("Player connected: ",id)
 	
 	Ids.append(id)
-	get_node("/root/Level").spawn_player(str(id))
 func _player_disconnected(id):
 	print("Player disconnected: ",id)
 	
 	Ids.erase(id)
-	get_node("/root/Level/"+str(id)).queue_free()
+	get_node("/root/Level/PlayerNetworkController/"+str(id)).queue_free()
 
 
 func _connected():
-	var d=rpc_id(1,"GetState")
 	get_node("/root/Level/1").name=str(get_tree().get_network_unique_id())
 	print("connected")
-	for i in d.keys():
-		print("Lol")
-		get_node("/root/Level").spawn_player(str(i))
-		get_node("/root/Level/"+str(i)).position=d[i]
 func _connectionF():
 	pass
 
@@ -64,20 +59,20 @@ func _process(delta):
 
 
 func SendPosition(pos:Vector2):
+	if get_tree().get_network_unique_id()==1:
+		return
 	rpc_unreliable_id(1,"SetState",pos)
 
 remote func SetState(pos:Vector2):
 	var PlayerID=get_tree().get_rpc_sender_id()
-	
 	PlayerStateCol[PlayerID]=pos
+
 remote func GetState():
 	return PlayerStateCol
 
 func ReturnPosition():
-	for i in Ids:
-		if i==1:
-			continue
-		var node=get_node("/root/Level/"+str(i))
-		
-		node.position=PlayerStateCol[i]
-		node.rset_unreliable("position",PlayerStateCol[i])
+	var node=get_node_or_null("/root/Level/PlayerNetworkController")
+	if node!=null:
+		PlayerStateCol[1]=get_node("/root/Level/PlayerNetworkController/1").position
+		node.rpc("_update",PlayerStateCol)
+		node._update(PlayerStateCol)
