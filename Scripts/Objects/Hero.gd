@@ -2,8 +2,6 @@ extends KinematicBody2D
 
 class_name Hero
 
-var Grenade=preload("res://Scenes/Weapons/Shells/Grenade.tscn")
-
 export(float) var movSpeed=150
 export(float) var dsTime = 0.3
 export(float) var dsRelTime = 1
@@ -26,8 +24,10 @@ onready var Cam=$Camera2D
 
 signal HealthChanged(value)
 signal Dead()
+signal InventoryChanged()
 signal WeaponChanged(obj)
 signal AmmoChanged(value)
+signal Fire(vec,pos)
 signal HeroInit(Hero)
 
 func _ready():
@@ -56,6 +56,7 @@ func _process(delta:float):
 	
 	if Input.is_action_pressed("Fire") and weapon.reloaded:
 		weapon.fire(firePos,position+firePos*10)
+		emit_signal("Fire",firePos,position+firePos)
 	
 	if Input.is_action_pressed("Grenade") and weapon.altReloaded:
 		weapon.altFire(firePos,position+firePos*6)
@@ -82,16 +83,23 @@ func changeWeapon():
 	weapon.visible=true
 	emit_signal("WeaponChanged",weapon)
 
+func inventoryUpdate():
+	emit_signal("InventoryChanged")
+	print("Invent")
+
 func _on_Timer_timeout():
 	dash = 0
 
-func damage(dam:float):
+remote func damage(dam:float):
 	health-=dam
 	emit_signal("HealthChanged",health)
 	
 	if health<1:
 		emit_signal("Dead")
 		set_process(false)
+
+remote func getState()->Vector2:
+	return position
 
 func _on_Area2D_body_entered(body:Bullet):
 	if body==null:return
