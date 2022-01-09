@@ -16,7 +16,12 @@ func _on_CrocogunItem_used():
 	print("item used")
 
 
-func spawn_player(name:String):
+remotesync func spawn_player(name:int):
+	if get_tree().get_network_unique_id() == name:
+		return
+	
 	var node=Player.instance()
-	node.name=name
+	node.set_network_master(name)
+	
+	node.name=str(name)
 	$PlayerNetworkController.add_child(node)

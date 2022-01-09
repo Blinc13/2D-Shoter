@@ -13,37 +13,38 @@ var Weapons={
 
 var PlayerStateCopy:Dictionary
 
+remote func init():
+	var List=rpc_id(1,"GetPlayersList")
+	print_debug("Init")
+
 func _process(delta):
-	var PlayerStats={
-		"P":PlayerNode.position,
-		"H":PlayerNode.health,
-		"A":DrawingObj.rotation,
-	}
-	Server.SendPlayerState(PlayerStats)
-
-remote func _update(State:Dictionary):
-	for i in State.keys():
-		var node=get_node_or_null(str(i))
-		if node == null:
-			get_parent().spawn_player(str(i))
-		elif get_tree().get_network_unique_id() != i:
-			node.position=State[i]["P"]
-			node.rotation=State[i]["A"]
-			
-			if GetPlayerWeaponsNames(node).size() != State[i]["I"].size():
-				var list=node.get_node("Drawing/Weapons")
-				
-				list.add_child(Weapons[State[i]["I"].back()].instance())
-
+	PlayerNode.rpc_unreliable("set_position",PlayerNode.position)
+	PlayerNode.rpc_unreliable("set_rotation",PlayerNode.DrawingObj.rotation)
 
 func _on_1_Fire(vec, pos):
 	PlayerNode.weapon.rpc("fire",vec,pos)
 
 func PlayerInventoryChanged():
-	Server.SendInventoryState(GetPlayerWeaponsNames(PlayerNode).back())
+	rpc(AddWeaponToPlayerInventory(GetPlayerWeaponsNames(PlayerNode).back()))
 
 func PlayerWeaponChanged(weapon):
-	pass
+	PlayerNode.rpc("ch_weapon")
+
+remote func AddWeaponToPlayerInventory(name:String):
+	var PlayerID=get_tree().get_rpc_sender_id()
+	get_node(str(PlayerID)+"/Drawing/Weapons").add_child(Weapons[name].instance())
+
+remote func GetPlayersList()->Dictionary:
+	var Players:Dictionary
+	
+	for i in get_child_count():
+		var PlayerState:Dictionary
+		
+		PlayerState["P"]=get_child(i).position
+		PlayerState["A"]=get_child(i).DrawingObj.rotation
+		PlayerState["I"]=GetPlayerWeaponsNames(get_child(i))
+	
+	return Players
 
 func GetPlayerWeaponsNames(node)->Array:
 	var inventory=node.get_node("Drawing/Weapons").get_children()

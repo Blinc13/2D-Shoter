@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/Sprites/HeroSprite/Res/HeroAnimation.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Scripts/Objects/HeroTemplate.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Weapons/Guns/m16.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -10,6 +11,7 @@ extents = Vector2( 5.9551, 7.86408 )
 extents = Vector2( 4, 4 )
 
 [node name="Hero" type="KinematicBody2D" groups=["Entity", "Hero"]]
+script = ExtResource( 2 )
 
 [node name="Drawing" type="Node2D" parent="."]
 
@@ -37,5 +39,3 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 2 )
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

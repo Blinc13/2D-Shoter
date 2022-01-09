@@ -133,16 +133,19 @@ position = Vector2( 583, -172 )
 [node name="Gun" parent="." instance=ExtResource( 7 )]
 position = Vector2( 491, -168 )
 texture = ExtResource( 8 )
+WeaponName = "Crocogun"
 
 [node name="Gun2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 599, -194 )
 texture = ExtResource( 6 )
 "Weapon scene" = ExtResource( 12 )
+WeaponName = "Pistol"
 
 [node name="Gun3" parent="." instance=ExtResource( 7 )]
 position = Vector2( 425, -197 )
 texture = ExtResource( 14 )
 "Weapon scene" = ExtResource( 13 )
+WeaponName = "RocketLauncher"
 
 [node name="PlayerNetworkController" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -170,3 +173,6 @@ position = Vector2( 0, -0.5 )
 shape = SubResource( 5 )
 
 [connection signal="Dead" from="PlayerNetworkController/1" to="." method="_on_Hero_Dead"]
+[connection signal="Fire" from="PlayerNetworkController/1" to="PlayerNetworkController" method="_on_1_Fire"]
+[connection signal="InventoryChanged" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerInventoryChanged"]
+[connection signal="WeaponChanged" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerWeaponChanged"]
