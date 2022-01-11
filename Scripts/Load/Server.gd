@@ -28,8 +28,12 @@ func StartClient():
 
 func _player_connected(id):
 	print("Player connected: ",id)
+	
+	var Network=get_node("/root/Level/PlayerNetworkController")
+	
+	Network.rpc_id(id,"init",Network.GetPlayersList())
+	
 	get_node("/root/Level").rpc("spawn_player",id)
-	get_node("/root/Level/PlayerNetworkController").rpc_id(id,"init")
 
 func _player_disconnected(id):
 	print("Player disconnected: ",id)

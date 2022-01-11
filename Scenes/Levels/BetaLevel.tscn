@@ -1,7 +1,7 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scripts/Load/BetaLevel.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Enemys/Shrek.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Resources/Textures/Map/Data/MapTiles.tres" type="TileSet" id=3]
 [ext_resource path="res://Resources/Sprites/Objects/Res/ObjectsTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Scripts/Objects/PlayerNetworkControl.gd" type="Script" id=5]
@@ -9,11 +9,13 @@
 [ext_resource path="res://Scenes/Items/GunItem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Resources/Sprites/Ui/guns/Crocogun.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/Another/Hero.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Another/UnitSpawner.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Weapons/Shells/Rocket.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Weapons/Guns/Pistol.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Scenes/Weapons/Guns/RocketLauncher.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Resources/Sprites/Ui/guns/RocketLauncher.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Items/FirstAidKit.tscn" type="PackedScene" id=15]
+[ext_resource path="res://Scenes/Enemys/Spider.tscn" type="PackedScene" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 489, 10 )
@@ -106,10 +108,6 @@ collision_mask = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 511, -76 )
-texture = ExtResource( 2 )
-
 [node name="Line2D" type="Line2D" parent="."]
 width = 5.0
 default_color = Color( 0.027451, 0.188235, 1, 1 )
@@ -152,6 +150,17 @@ script = ExtResource( 5 )
 
 [node name="1" parent="PlayerNetworkController" instance=ExtResource( 9 )]
 position = Vector2( 24, 235 )
+
+[node name="UnitSpawner" parent="." instance=ExtResource( 10 )]
+position = Vector2( 183, 76 )
+Delay = 4.0
+"Max Units" = 5
+"Unit scene" = ExtResource( 2 )
+
+[node name="UnitSpawner2" parent="." instance=ExtResource( 10 )]
+Delay = 2.0
+"Max Units" = 20
+"Unit scene" = ExtResource( 16 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 4 )

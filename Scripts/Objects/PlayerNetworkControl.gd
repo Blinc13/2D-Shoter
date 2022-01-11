@@ -4,6 +4,8 @@ class_name PlayerNetworkController
 onready var PlayerNode=get_node("1")
 onready var DrawingObj=PlayerNode.get_node("Drawing")
 
+var PlayerTemplate=preload("res://Scenes/Another/HeroTemplate.tscn")
+
 var Weapons={
 	"m16":load("res://Scenes/Weapons/Guns/m16.tscn"),
 	"Crocogun":load("res://Scenes/Weapons/Guns/Crocogun.tscn"),
@@ -11,11 +13,17 @@ var Weapons={
 	"Pistol":load("res://Scenes/Weapons/Guns/Pistol.tscn")
 }
 
-var PlayerStateCopy:Dictionary
-
-remote func init():
-	var List=rpc_id(1,"GetPlayersList")
-	print_debug("Init")
+remote func init(List:Dictionary):
+	print_debug("Init !: ",List)
+	for i in List.keys():
+		var node=PlayerTemplate.instance()
+		
+		node.name=i
+		node.position=List[i]["P"]
+		
+		add_child(node)
+		
+		node.DrawingObj.rotation=List[i]["A"]
 
 func _process(delta):
 	PlayerNode.rpc_unreliable("set_position",PlayerNode.position)
@@ -24,30 +32,33 @@ func _process(delta):
 func _on_1_Fire(vec, pos):
 	PlayerNode.weapon.rpc("fire",vec,pos)
 
-func PlayerInventoryChanged():
-	rpc(AddWeaponToPlayerInventory(GetPlayerWeaponsNames(PlayerNode).back()))
+func PlayerInventoryChanged(WeaponName):
+	rpc("AddWeaponToPlayerInventory",WeaponName)
 
 func PlayerWeaponChanged(weapon):
-	PlayerNode.rpc("ch_weapon")
+	PlayerNode.rpc("ch_weapon",weapon.name)
 
 remote func AddWeaponToPlayerInventory(name:String):
 	var PlayerID=get_tree().get_rpc_sender_id()
-	get_node(str(PlayerID)+"/Drawing/Weapons").add_child(Weapons[name].instance())
+	get_node(str(PlayerID)).WeaponsList.add_child(Weapons[name].instance())
 
-remote func GetPlayersList()->Dictionary:
+func GetPlayersList()->Dictionary:
 	var Players:Dictionary
 	
 	for i in get_child_count():
 		var PlayerState:Dictionary
+		var Player=get_child(i)
 		
-		PlayerState["P"]=get_child(i).position
-		PlayerState["A"]=get_child(i).DrawingObj.rotation
-		PlayerState["I"]=GetPlayerWeaponsNames(get_child(i))
-	
+		PlayerState["P"]=Player.position
+		PlayerState["A"]=Player.DrawingObj.rotation
+		PlayerState["I"]=GetPlayerWeaponsNames(Player)
+		
+		Players[Player.name]=PlayerState
+		
 	return Players
 
 func GetPlayerWeaponsNames(node)->Array:
-	var inventory=node.get_node("Drawing/Weapons").get_children()
+	var inventory=node.WeaponsList.get_children()
 	var inventoryNames:Array
 	
 	for i in inventory:

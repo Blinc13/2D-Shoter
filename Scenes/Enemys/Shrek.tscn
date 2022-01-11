@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Objects/Enemys/Shrek.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Sprites/Shrek/Res/ShrekAnimation.tres" type="SpriteFrames" id=2]
@@ -8,6 +8,9 @@ extents = Vector2( 7, 7 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4.5, 4.5 )
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 219.804
 
 [node name="Shrek" type="KinematicBody2D" groups=["Entity"]]
 collision_mask = 0
@@ -34,21 +37,23 @@ collision_mask = 2
 position = Vector2( -1.5, -1.5 )
 shape = SubResource( 2 )
 
+[node name="Trigger" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trigger"]
+shape = SubResource( 3 )
+
 [node name="Timer" type="Timer" parent="."]
 
 [node name="AttackTimer" type="Timer" parent="."]
-autostart = true
 
 [node name="PathTimerUpdate" type="Timer" parent="."]
-wait_time = 5.0
-autostart = true
 
 [node name="DirCheck" type="Timer" parent="."]
 wait_time = 0.5
-autostart = true
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
 [connection signal="body_entered" from="Hitbox" to="." method="HitboxAct"]
+[connection signal="body_entered" from="Trigger" to="." method="TriggerAct"]
 [connection signal="timeout" from="Timer" to="." method="queue_free"]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
 [connection signal="timeout" from="PathTimerUpdate" to="." method="new_path"]

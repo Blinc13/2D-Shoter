@@ -14,9 +14,7 @@ void FirstAidKit::_register_methods()
 }
 
 void FirstAidKit::_init()
-{
-	args.append(-health);
-}
+{}
 
 void FirstAidKit::_ready()
 {
