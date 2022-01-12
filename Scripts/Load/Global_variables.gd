@@ -22,6 +22,7 @@ var gameSetUp={
 	"Server":
 	{
 		"MaxPlayers":4,
+		"Ip":"192.168.0.103",
 		"Port":8086
 	}
 }
