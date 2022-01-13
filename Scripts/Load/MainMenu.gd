@@ -12,8 +12,7 @@ func _ready():
 	$Settings/Server/ScrollArea/Widgets/Port/LineEdit.text=str(GlobalVariables.gameSetUp["Server"]["Port"])
 
 func _on_PlayBtn_pressed():
-	hide()
-	get_tree().root.add_child(load("res://Scenes/Levels/BetaLevel.tscn").instance())
+	$PanelContainer.visible=true
 
 func _on_SettingsBtn_pressed():
 	$Settings.visible = !$Settings.visible
@@ -37,3 +36,13 @@ func SpeedEdit(PlayerSpeed:String):
 	GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]=float(PlayerSpeed)
 func RespTimeEdit(RespTime:String):
 	GlobalVariables.gameSetUp["Game"]["PlayerRespTime"]=float(RespTime)
+
+
+func Server_start():
+	Server.StartServer()
+func Client_start():
+	Server.StartClient()
+func start_game():
+	if Server.isServer:
+		Server.start_game()
+		visible=false

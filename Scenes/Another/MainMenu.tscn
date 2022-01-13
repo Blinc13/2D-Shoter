@@ -311,33 +311,61 @@ focus_neighbour_top = NodePath("../SettingsBtn")
 focus_neighbour_bottom = NodePath("../PlayBtn")
 text = "Exit"
 
-[node name="ScrollContainer" type="ScrollContainer" parent="."]
-visible = false
+[node name="PanelContainer" type="PanelContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -151.5
-margin_top = -40.0
-margin_right = 151.5
-margin_bottom = 40.0
-scroll_horizontal_enabled = false
+margin_left = -156.5
+margin_top = -127.5
+margin_right = 156.5
+margin_bottom = 127.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 306.0
+margin_bottom = 248.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
-margin_right = 303.0
-margin_bottom = 80.0
+[node name="control" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_right = 299.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Client" type="Button" parent="PanelContainer/VBoxContainer/control"]
+margin_right = 49.0
+margin_bottom = 20.0
+text = "Client"
+
+[node name="HSeparator" type="HSeparator" parent="PanelContainer/VBoxContainer/control"]
+margin_left = 53.0
+margin_right = 243.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Server" type="Button" parent="PanelContainer/VBoxContainer/control"]
+margin_left = 247.0
+margin_right = 299.0
+margin_bottom = 20.0
+text = "Server"
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 299.0
+margin_bottom = 217.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="ScrollContainer"]
-margin_right = 303.0
-margin_bottom = 80.0
-size_flags_horizontal = 3
-size_flags_vertical = 7
-text = "Game list"
+[node name="StartGame" type="Button" parent="PanelContainer/VBoxContainer"]
+margin_top = 221.0
+margin_right = 299.0
+margin_bottom = 241.0
+text = "Start"
 
 [connection signal="value_changed" from="Settings/Audio/VBoxContainer/VBoxContainer2/VBoxContainer/AudioVolume" to="." method="_on_AudioValume_value_changed"]
 [connection signal="text_changed" from="Settings/Game/ScrollArea/Widgets/PlayerMaxHealth/LineEdit" to="." method="HealthEdit"]
@@ -349,3 +377,6 @@ text = "Game list"
 [connection signal="pressed" from="ControllButtonst/VBoxContainer/PlayBtn" to="." method="_on_PlayBtn_pressed"]
 [connection signal="pressed" from="ControllButtonst/VBoxContainer/SettingsBtn" to="." method="_on_SettingsBtn_pressed"]
 [connection signal="pressed" from="ControllButtonst/VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/control/Client" to="." method="Client_start"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/control/Server" to="." method="Server_start"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/StartGame" to="." method="start_game"]
