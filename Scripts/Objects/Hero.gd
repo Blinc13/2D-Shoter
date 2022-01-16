@@ -13,7 +13,7 @@ var ChReload:float
 var dsReload:float
 var dash:float
 var maxHealth:float=GlobalVariables.gameSetUp["Game"]["MaxPlayerHealth"]
-var health:float=maxHealth
+var health:float
 var speed:float=movSpeed*GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
 
 onready var WeaponsList=$Drawing/Weapons
@@ -23,17 +23,16 @@ onready var AnimationObj=$Drawing/AnimatedSprite
 onready var Cam=$Camera2D
 
 signal HealthChanged(value)
-signal Dead()
-signal InventoryChanged()
+signal Dead(Hero)
+signal InventoryChanged(WeaponName)
 signal WeaponChanged(obj)
 signal AmmoChanged(value)
 signal Fire(vec,pos)
 signal HeroInit(Hero)
 
 func _ready():
-	speed*=GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
-	print(WeaponsList.position)
-	print(weapon.position)
+	health=maxHealth
+	print("Init")
 	emit_signal("HeroInit",self)
 
 func _input(event):
@@ -56,7 +55,7 @@ func _process(delta:float):
 	
 	if Input.is_action_pressed("Fire") and weapon.reloaded:
 		weapon.fire(firePos,position+firePos*10)
-		emit_signal("Fire",firePos,position+firePos)
+		emit_signal("Fire",firePos,position+firePos*10)
 	
 	if Input.is_action_pressed("Grenade") and weapon.altReloaded:
 		weapon.altFire(firePos,position+firePos*6)
@@ -83,9 +82,8 @@ func changeWeapon():
 	weapon.visible=true
 	emit_signal("WeaponChanged",weapon)
 
-func inventoryUpdate():
-	emit_signal("InventoryChanged")
-	print("Invent")
+func inventoryUpdate(WeaponName):
+	emit_signal("InventoryChanged",WeaponName)
 
 func _on_Timer_timeout():
 	dash = 0
@@ -95,8 +93,7 @@ remote func damage(dam:float):
 	emit_signal("HealthChanged",health)
 	
 	if health<1:
-		emit_signal("Dead")
-		set_process(false)
+		emit_signal("Dead",self)
 
 remote func getState()->Vector2:
 	return position

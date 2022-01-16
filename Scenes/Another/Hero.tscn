@@ -51,6 +51,7 @@ shape = SubResource( 2 )
 
 [node name="GameUi" parent="." instance=ExtResource( 4 )]
 
+[connection signal="Dead" from="." to="GameUi" method="HeroDead"]
 [connection signal="HealthChanged" from="." to="GameUi" method="HealthChanged"]
 [connection signal="HeroInit" from="." to="GameUi" method="init"]
 [connection signal="WeaponChanged" from="." to="GameUi" method="WeaponChanged"]

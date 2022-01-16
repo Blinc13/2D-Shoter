@@ -16,6 +16,8 @@ var Weapons={
 remote func init(List:Dictionary):
 	print_debug("Init !: ",List)
 	for i in List.keys():
+		if int(i) == get_tree().get_network_unique_id():
+			continue
 		var node=PlayerTemplate.instance()
 		
 		node.name=i
@@ -40,6 +42,7 @@ func PlayerWeaponChanged(weapon):
 
 remote func AddWeaponToPlayerInventory(name:String):
 	var PlayerID=get_tree().get_rpc_sender_id()
+	print(name)
 	get_node(str(PlayerID)).WeaponsList.add_child(Weapons[name].instance())
 
 func GetPlayersList()->Dictionary:

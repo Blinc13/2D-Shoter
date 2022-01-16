@@ -81,6 +81,7 @@ func TriggerAct(node:Node2D):
 	if node.is_in_group("Hero"):
 		target=node
 		$Trigger.set_deferred("monitoring",false)
+		AnimationObj.playing=true
 		init()
 		set_process(true)
 

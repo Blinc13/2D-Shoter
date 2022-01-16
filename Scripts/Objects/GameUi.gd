@@ -17,6 +17,9 @@ func init(Hero):
 	HealthBar.max_value=hero.maxHealth
 	HealthBar.value=hero.health
 	
+	$Control.visible=true
+	$Label.visible=false
+	
 	set_process(true)
 
 func _input(event):
@@ -25,6 +28,10 @@ func _input(event):
 
 func _process(delta):
 	Aim.frame=weapon.rel/weapon.relTime*5
+
+func HeroDead(hero):
+	$Control.visible=false
+	$Label.visible=true
 
 func HealthChanged(value):
 	HealthBar.value=value
