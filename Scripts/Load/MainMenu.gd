@@ -12,7 +12,11 @@ func _ready():
 	$Settings/Server/ScrollArea/Widgets/Port/LineEdit.text=str(GlobalVariables.gameSetUp["Server"]["Port"])
 
 func _on_PlayBtn_pressed():
-	$PanelContainer.visible=true
+	if $PanelContainer.visible:
+		Server.StopServer()
+		$PanelContainer.visible=false
+	else:
+		$PanelContainer.visible=true
 
 func _on_SettingsBtn_pressed():
 	$Settings.visible = !$Settings.visible

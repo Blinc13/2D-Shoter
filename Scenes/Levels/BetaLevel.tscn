@@ -178,7 +178,9 @@ shape = SubResource( 5 )
 [node name="DeadTimer" type="Timer" parent="."]
 
 [connection signal="Dead" from="PlayerNetworkController/1" to="." method="_on_Hero_Dead"]
-[connection signal="Fire" from="PlayerNetworkController/1" to="PlayerNetworkController" method="_on_1_Fire"]
+[connection signal="Dead" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerDead"]
+[connection signal="Fire" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerFire"]
+[connection signal="HeroInit" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerSpawn"]
 [connection signal="InventoryChanged" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerInventoryChanged"]
 [connection signal="WeaponChanged" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerWeaponChanged"]
 [connection signal="timeout" from="DeadTimer" to="." method="resp"]

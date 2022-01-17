@@ -13,6 +13,9 @@ var Weapons={
 	"Pistol":load("res://Scenes/Weapons/Guns/Pistol.tscn")
 }
 
+func _init():
+	Server.connect("Disconnected",self,"Disconnected")
+
 remote func init(List:Dictionary):
 	print_debug("Init !: ",List)
 	for i in List.keys():
@@ -27,24 +30,38 @@ remote func init(List:Dictionary):
 		
 		node.DrawingObj.rotation=List[i]["A"]
 
+#					Data send
 func _process(delta):
 	PlayerNode.rpc_unreliable("set_position",PlayerNode.position)
 	PlayerNode.rpc_unreliable("set_rotation",PlayerNode.DrawingObj.rotation)
 
-func _on_1_Fire(vec, pos):
-	PlayerNode.weapon.rpc("fire",vec,pos)
-
+#					Slots
+func PlayerFire(name:String,vec:Vector2, pos:Vector2):
+	PlayerNode.weapon.rpc(name,vec,pos)
 func PlayerInventoryChanged(WeaponName):
 	rpc("AddWeaponToPlayerInventory",WeaponName)
-
 func PlayerWeaponChanged(weapon):
 	PlayerNode.rpc("ch_weapon",weapon.name)
-
+func PlayerSpawn(player):
+	if PlayerNode == null:
+		return
+	PlayerNode.rpc("ch_state",true)
+func PlayerDead(player):
+	if PlayerNode == null:
+		return
+	PlayerNode.rpc("ch_state",false)
+func Disconnected(id):
+	rpc("PlayerDisconnected",id)
+#					Slots remote
 remote func AddWeaponToPlayerInventory(name:String):
 	var PlayerID=get_tree().get_rpc_sender_id()
 	print(name)
 	get_node(str(PlayerID)).WeaponsList.add_child(Weapons[name].instance())
 
+remotesync func PlayerDisconnected(id:int):
+	get_node(str(id)).queue_free()
+
+#					Server funcs
 func GetPlayersList()->Dictionary:
 	var Players:Dictionary
 	

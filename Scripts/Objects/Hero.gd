@@ -16,6 +16,11 @@ var maxHealth:float=GlobalVariables.gameSetUp["Game"]["MaxPlayerHealth"]
 var health:float
 var speed:float=movSpeed*GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
 
+var Effects={
+	false:preload("res://Scenes/Effects/HeroDead.tscn"),
+	true:preload("res://Scenes/Effects/HeroSpawn.tscn")
+}
+
 onready var WeaponsList=$Drawing/Weapons
 onready var weapon=WeaponsList.get_child(0)
 onready var DrawingObj=$Drawing
@@ -26,13 +31,14 @@ signal HealthChanged(value)
 signal Dead(Hero)
 signal InventoryChanged(WeaponName)
 signal WeaponChanged(obj)
-signal AmmoChanged(value)
-signal Fire(vec,pos)
+signal Fire(name,vec,pos)
 signal HeroInit(Hero)
 
 func _ready():
 	health=maxHealth
-	print("Init")
+	
+	ch_state(true)
+	
 	emit_signal("HeroInit",self)
 
 func _input(event):
@@ -55,10 +61,11 @@ func _process(delta:float):
 	
 	if Input.is_action_pressed("Fire") and weapon.reloaded:
 		weapon.fire(firePos,position+firePos*10)
-		emit_signal("Fire",firePos,position+firePos*10)
+		emit_signal("Fire","fire",firePos,position+firePos*10)
 	
 	if Input.is_action_pressed("Grenade") and weapon.altReloaded:
 		weapon.altFire(firePos,position+firePos*6)
+		emit_signal("Fire","altFire",firePos,position+firePos*10)
 	
 	if Input.is_action_pressed("ChWeapon") and ChReload>0.5:
 		changeWeapon()
@@ -93,13 +100,23 @@ remote func damage(dam:float):
 	emit_signal("HealthChanged",health)
 	
 	if health<1:
+		ch_state(false)
+		
 		emit_signal("Dead",self)
-
-remote func getState()->Vector2:
-	return position
 
 func _on_Area2D_body_entered(body:Bullet):
 	if body==null:return
 	
 	damage(body.damage(velocity*speed))
 	body.queue_free()
+
+func ch_state(st:bool):
+	visible=st
+	
+	set_process_input(st)
+	set_process(st)
+	
+	var node=Effects[st].instance()	
+	node.start(position)
+	
+	get_node("/root/Level").add_child(node)

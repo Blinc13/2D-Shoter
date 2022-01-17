@@ -6,17 +6,18 @@ export(NodePath) var PlayerControllNode="."
 
 var DeadHero
 var Player=preload("res://Scenes/Another/HeroTemplate.tscn")
+var RespTime=GlobalVariables.gameSetUp["Game"]["PlayerRespTime"]
 
 func _ready():
 	get_node("PlayerNetworkController/1").name=str(get_tree().get_network_unique_id())
 
 func _on_Hero_Dead(hero):
 	DeadHero=hero
-	$DeadTimer.start(1)
+	$DeadTimer.start(RespTime)
 
 func resp():
-	DeadHero._ready()
 	DeadHero.position=SpawnPoints[randi()%SpawnPoints.size()]
+	DeadHero._ready()
 	$DeadTimer.stop()
 
 func _on_CrocogunItem_used():
