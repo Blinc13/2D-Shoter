@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var alive:bool=true
+
 onready var DrawingObj=$Drawing
 onready var WeaponsList=$Drawing/Weapons
 onready var LastWeapon:Weapon=WeaponsList.get_child(0)
@@ -22,8 +24,9 @@ remote func ch_weapon(Name:String):
 
 remote func ch_state(st:bool):
 	visible=st
-	var node=Effects[st].instance()
+	alive=st
 	
+	var node=Effects[st].instance()
 	node.start(position)
 	
 	get_node("/root/Level").add_child(node)

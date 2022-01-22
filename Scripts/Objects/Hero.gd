@@ -14,6 +14,7 @@ var dsReload:float
 var dash:float
 var maxHealth:float=GlobalVariables.gameSetUp["Game"]["MaxPlayerHealth"]
 var health:float
+var alive:bool
 var speed:float=movSpeed*GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]
 
 var Effects={
@@ -111,10 +112,12 @@ func _on_Area2D_body_entered(body:Bullet):
 	body.queue_free()
 
 func ch_state(st:bool):
-	visible=st
+	DrawingObj.visible=st
 	
 	set_process_input(st)
 	set_process(st)
+	
+	alive=st
 	
 	var node=Effects[st].instance()	
 	node.start(position)

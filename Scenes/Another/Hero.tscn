@@ -12,6 +12,7 @@ extents = Vector2( 5.9551, 7.86408 )
 extents = Vector2( 4, 4 )
 
 [node name="Hero" type="KinematicBody2D" groups=["Entity", "Hero"]]
+collision_mask = 0
 script = ExtResource( 2 )
 dsTime = 0.01
 

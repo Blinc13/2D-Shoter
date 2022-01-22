@@ -44,20 +44,25 @@ func _player_connected(id):
 	rpc_id(id,"set_variables",GlobalVariables.gameSetUp["Game"])
 	print("Player connected: ",id)
 	
-	emit_signal("Connected",id)
-
-
+	rpc("send_signal","Connected",id)
 func _player_disconnected(id):
 	print("Player disconnected: ",id)
 	
-	emit_signal("Disconnected",id)
+	rpc("send_signal","Disconnected",id)
+
 
 remote func set_variables(gameSetUp):
 	GlobalVariables.gameSetUp["Game"]=gameSetUp
+remotesync func send_signal(name,arg):
+	print("rpc signal")
+	emit_signal(name,arg)
 
 remotesync func start():
 	get_node("/root").add_child(load("res://Scenes/Levels/BetaLevel.tscn").instance())
-
+	get_node("/root/Control").visible=false
+remotesync func end():
+	get_node("/root/Level").queue_free()
+	get_node("/root/Control").visible=true
 
 func start_game():
 	get_tree().set_refuse_new_network_connections(true)
@@ -69,3 +74,10 @@ func start_game():
 	var net=get_node("/root/Level/PlayerNetworkController")
 	
 	net.rpc("init",net.GetPlayersList())
+
+func end_game():
+	get_tree().set_refuse_new_network_connections(false)
+	if isServer:
+		rpc("end")
+	else:
+		end()

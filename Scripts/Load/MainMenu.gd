@@ -10,13 +10,16 @@ func _ready():
 	$Settings/Server/ScrollArea/Widgets/Ip/LineEdit.text=str(GlobalVariables.gameSetUp["Server"]["Ip"])
 	$Settings/Server/ScrollArea/Widgets/MaxPlayers/LineEdit.text=str(GlobalVariables.gameSetUp["Server"]["MaxPlayers"])
 	$Settings/Server/ScrollArea/Widgets/Port/LineEdit.text=str(GlobalVariables.gameSetUp["Server"]["Port"])
+	
+	Server.connect("Connected",self,"Pconnected")
+	Server.connect("Disconnected",self,"Pdisconnect")
 
 func _on_PlayBtn_pressed():
-	if $PanelContainer.visible:
+	if $NetworkMenu.visible:
 		Server.StopServer()
-		$PanelContainer.visible=false
+		$NetworkMenu.visible=false
 	else:
-		$PanelContainer.visible=true
+		$NetworkMenu.visible=true
 
 func _on_SettingsBtn_pressed():
 	$Settings.visible = !$Settings.visible
@@ -50,3 +53,14 @@ func start_game():
 	if Server.isServer:
 		Server.start_game()
 		visible=false
+
+func Pconnected(id:int):
+	var node=Label.new()
+	var name=str(id)
+	
+	node.name=name
+	node.text=name
+	
+	$NetworkMenu/VBoxContainer/PlayersList.add_child(node)
+func Pdisconnect(id:int):
+	get_node("NetworkMenu/VBoxContainer/PlayersList/"+str(id)).queue_free()

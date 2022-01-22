@@ -1,7 +1,6 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=19 format=2]
 
-[ext_resource path="res://Scripts/Load/Level.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Another/UnitSpawner.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scripts/Load/Deathmatch.gd" type="Script" id=1]
 [ext_resource path="res://Resources/Textures/Map/Data/MapTiles.tres" type="TileSet" id=3]
 [ext_resource path="res://Resources/Sprites/Objects/Res/ObjectsTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Scripts/Objects/PlayerNetworkControl.gd" type="Script" id=5]
@@ -9,10 +8,9 @@
 [ext_resource path="res://Scenes/Items/GunItem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Resources/Sprites/Ui/guns/Crocogun.png" type="Texture" id=8]
 [ext_resource path="res://Scenes/Another/Hero.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Scenes/Enemys/Spider.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Weapons/Guns/Pistol.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Weapons/Shells/Rocket.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Scenes/Weapons/Guns/Pistol.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Scenes/Weapons/Guns/RocketLauncher.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Weapons/Guns/RocketLauncher.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Resources/Sprites/Ui/guns/RocketLauncher.png" type="Texture" id=14]
 [ext_resource path="res://Scenes/Items/FirstAidKit.tscn" type="PackedScene" id=15]
 
@@ -45,7 +43,7 @@ extents = Vector2( 104, 16.5 )
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
-SpawnPoints = PoolVector2Array( 0, 0, 452, -180 )
+PlayersController = NodePath("PlayerNetworkController")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 3 )
@@ -118,8 +116,8 @@ collision_layer = 3
 collision_mask = 3
 space_override = 3
 gravity_point = true
-gravity = 774.404
-linear_damp = 50.947
+gravity = 400.0
+linear_damp = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( -4, 4 )
@@ -136,19 +134,14 @@ WeaponName = "Crocogun"
 [node name="Gun2" parent="." instance=ExtResource( 7 )]
 position = Vector2( 599, -194 )
 texture = ExtResource( 6 )
-"Weapon scene" = ExtResource( 12 )
+"Weapon scene" = ExtResource( 10 )
 WeaponName = "Pistol"
 
 [node name="Gun3" parent="." instance=ExtResource( 7 )]
 position = Vector2( 425, -197 )
 texture = ExtResource( 14 )
-"Weapon scene" = ExtResource( 13 )
+"Weapon scene" = ExtResource( 12 )
 WeaponName = "RocketLauncher"
-
-[node name="UnitSpawner" parent="." instance=ExtResource( 2 )]
-position = Vector2( 160, 72 )
-Delay = 4.0
-"Unit scene" = ExtResource( 10 )
 
 [node name="PlayerNetworkController" type="Node" parent="."]
 script = ExtResource( 5 )
@@ -177,6 +170,7 @@ shape = SubResource( 5 )
 
 [node name="DeadTimer" type="Timer" parent="."]
 
+[connection signal="Dead" from="PlayerNetworkController/1" to="." method="heroDead"]
 [connection signal="Dead" from="PlayerNetworkController/1" to="." method="_on_Hero_Dead"]
 [connection signal="Dead" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerDead"]
 [connection signal="Fire" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerFire"]

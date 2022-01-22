@@ -65,9 +65,8 @@ remotesync func PlayerDisconnected(id:int):
 func GetPlayersList()->Dictionary:
 	var Players:Dictionary
 	
-	for i in get_child_count():
+	for Player in get_children():
 		var PlayerState:Dictionary
-		var Player=get_child(i)
 		
 		PlayerState["P"]=Player.position
 		PlayerState["A"]=Player.DrawingObj.rotation
@@ -86,3 +85,12 @@ func GetPlayerWeaponsNames(node)->Array:
 	
 	print_debug(inventoryNames)
 	return inventoryNames
+
+func GetAlivePlayers()->Array:
+	var Players:Array
+	
+	for i in get_children():
+		if i.alive:
+			Players.append(i.name)
+	
+	return Players
