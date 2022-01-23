@@ -4,8 +4,11 @@ var lazer=preload("res://Scenes/Weapons/Shells/Lazer.tscn")
 var shoots:bool=false
 onready var ray:RayCast2D=$RayCast2D
 
-func _ready():
+func init():
 	ray.add_exception(target)
+	$AttackTimer.start(1)
+	$PathTimerUpdate.start(5)
+	$DirCheck.start(2)
 
 func _process(delta):
 	move_to_target(speed*delta)

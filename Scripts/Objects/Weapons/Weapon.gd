@@ -27,12 +27,12 @@ func fire_event(vel:Vector2,pos:Vector2):
 func alt_fire_event(vel:Vector2,pos:Vector2):
 	pass
 
-func fire(vel:Vector2,pos:Vector2):
+remote func fire(vel:Vector2,pos:Vector2):
 	rel=0
 	reloaded=false
 	fire_event(vel,pos)
 
-func altFire(vel:Vector2,pos:Vector2):
+remote func altFire(vel:Vector2,pos:Vector2):
 	altRel=0
 	altReloaded=false
 	alt_fire_event(vel,pos)

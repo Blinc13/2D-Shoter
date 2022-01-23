@@ -1,11 +1,7 @@
 extends Node
 
 func _init():
-	var save=File.new()
-	if !save.open("user://Settings.json",File.READ):
-		variables=parse_json(save.get_line())
-	if !save.open("user://GameSetUp.json",File.READ):
-		gameSetUp=parse_json(save.get_line())
+	open()
 
 var variables={
 	"Sounds":1,
@@ -16,14 +12,22 @@ var gameSetUp={
 	{
 		"MaxPlayerHealth":100,
 		"PlayerSpeedCof":1,
-		"PlayerRespTime":10,
-		"GameMode":"PvE"
+		"PlayerRespTime":10
 	},
 	"Server":
 	{
-		"MaxPlayers":8
+		"MaxPlayers":4,
+		"Ip":"192.168.0.103",
+		"Port":8086
 	}
 }
+
+func open():
+	var save=File.new()
+	if !save.open("user://Settings.json",File.READ):
+		variables=parse_json(save.get_line())
+	if !save.open("user://GameSetUp.json",File.READ):
+		gameSetUp=parse_json(save.get_line())
 
 func save():
 	var save=File.new()

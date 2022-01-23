@@ -8,8 +8,8 @@ export(float) var speed=50
 export(float) var damag=20
 export(float) var dead_visible_time=10
 
-onready var target=$"/root/Level/Hero"
 onready var nav=$"/root/Level/Nav"
+var target:Node2D
 
 onready var AnimationObj:AnimatedSprite=$AnimatedSprite
 onready var TimerObj:Timer=$Timer
@@ -22,6 +22,7 @@ var path:    PoolVector2Array
 
 func _ready():
 	attack_radius+=14
+	set_process(false)
 
 func move_to_target(distance):
 	var pos_g=get_global_position()
@@ -75,6 +76,17 @@ func _on_AnimatedSprite_animation_finished():
 		if global_position.distance_to(target.position)<=attack_radius:
 			target.damage(damag)
 		set_process(true)
+
+func TriggerAct(node:Node2D):
+	if node.is_in_group("Hero"):
+		target=node
+		$Trigger.set_deferred("monitoring",false)
+		AnimationObj.playing=true
+		init()
+		set_process(true)
+
+func init():
+	pass
 
 func death():
 	pass

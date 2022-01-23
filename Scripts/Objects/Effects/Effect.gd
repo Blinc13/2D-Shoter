@@ -1,6 +1,6 @@
 extends Particles2D
 
-export(float) var Wait=1
+export(float) var Wait=0.4
 
 func _ready():
 	emitting=true

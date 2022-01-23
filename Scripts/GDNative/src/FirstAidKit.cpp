@@ -14,9 +14,7 @@ void FirstAidKit::_register_methods()
 }
 
 void FirstAidKit::_init()
-{
-	args.append(-health);
-}
+{}
 
 void FirstAidKit::_ready()
 {
@@ -35,10 +33,10 @@ bool FirstAidKit::use_item(Node *obj)
 		float x=obj->get("health"),
 					y=obj->get("maxHealth");
 		
-		if (y-x>health)
+		if (float c=y-x;c>health)
 			set_args(health);
 		else
-			set_args(y-x);
+			set_args(c);
 			
 		obj->call("damage",args);
 		
