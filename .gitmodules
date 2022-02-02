@@ -1,0 +1,3 @@
+[submodule "Scripts/GDNative/godot-cpp"]
+	path = Scripts/GDNative/godot-cpp
+	url = https://github.com/godotengine/godot-cpp
