@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/Objects/Shells/Bullets/Bullet.gd"
 }, {
+"base": "Level",
+"class": "DeathMatch",
+"language": "GDScript",
+"path": "res://Scripts/Load/Deathmatch.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "Enemy",
 "language": "GDScript",
@@ -47,7 +52,12 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Level",
 "language": "GDScript",
-"path": "res://Scripts/Load/BetaLevel.gd"
+"path": "res://Scripts/Load/Level.gd"
+}, {
+"base": "PanelContainer",
+"class": "LevelItem",
+"language": "GDScript",
+"path": "res://Scripts/Objects/LevelItem.gd"
 }, {
 "base": "Node",
 "class": "PlayerNetworkController",
@@ -76,6 +86,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Bullet": "",
+"DeathMatch": "",
 "Enemy": "",
 "FirstAidKit": "",
 "Grenade": "",
@@ -83,6 +94,7 @@ _global_script_class_icons={
 "GunItem": "",
 "Hero": "",
 "Level": "",
+"LevelItem": "",
 "PlayerNetworkController": "",
 "Rocket": "",
 "Spider": "",
@@ -93,13 +105,14 @@ _global_script_class_icons={
 [application]
 
 config/name="Shoter2D"
-run/main_scene="res://Scenes/Another/MainMenu.tscn"
+run/main_scene="res://Scenes/Ui/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 GlobalVariables="*res://Scripts/Load/Global_variables.gd"
 Server="*res://Scripts/Load/Server.gd"
+Events="*res://Scripts/Load/Events.gd"
 
 [display]
 
