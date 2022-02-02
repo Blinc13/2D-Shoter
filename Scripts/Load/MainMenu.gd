@@ -14,12 +14,15 @@ func _ready():
 	Server.connect("Connected",self,"Pconnected")
 	Server.connect("Disconnected",self,"Pdisconnect")
 
-func _on_PlayBtn_pressed():
+func _on_Start_pressed():
 	if $NetworkMenu.visible:
 		Server.StopServer()
 		$NetworkMenu.visible=false
 	else:
 		$NetworkMenu.visible=true
+
+func _on_Play_pressed():
+	$LevelList.visible = !$LevelList.visible
 
 func _on_SettingsBtn_pressed():
 	$Settings.visible = !$Settings.visible
@@ -29,6 +32,9 @@ func _on_ExitBtn_pressed():
 
 func _on_AudioValume_value_changed(value):
 	GlobalVariables.variables["Sounds"]=value
+
+func LevelSelected(path:String):
+	Server.Map=path
 
 
 func MaxPlayersEdit(MaxPlayers:String):

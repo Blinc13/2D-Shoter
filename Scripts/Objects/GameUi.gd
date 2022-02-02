@@ -11,7 +11,7 @@ func _init():
 	set_process(false)
 
 func _ready():
-	Events.connect("update",self,"GameEnd")
+	Events.connect("game_end",self,"GameEnd")
 
 func init(Hero):
 	hero=Hero
@@ -48,3 +48,5 @@ func GameEnd(text:String):
 
 func ExitButtonPressed():
 	Server.end_game()
+func RespButtonPressed():
+	Events.emit_signal("resp")

@@ -1,6 +1,5 @@
 extends Node
 
-signal update(string)
+signal game_end(WinerName)
 
-func send_event(string:String):
-	emit_signal("update",string)
+signal resp()
