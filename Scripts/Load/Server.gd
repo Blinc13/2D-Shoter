@@ -73,9 +73,10 @@ func start_game():
 	for i in get_tree().get_network_connected_peers():
 		get_node("/root/Level").spawn_player(i)
 	
-	var net=get_node("/root/Level/PlayerNetworkController")
+	var net=get_node_or_null("/root/Level/PlayerNetworkController")
 	
-	net.rpc("init",net.GetPlayersList())
+	if net != null:
+		net.rpc("init",net.GetPlayersList())
 
 func end_game():
 	get_tree().set_refuse_new_network_connections(false)

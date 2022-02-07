@@ -11,8 +11,6 @@ var Player=preload("res://Scenes/Another/HeroTemplate.tscn")
 var RespTime=GlobalVariables.gameSetUp["Game"]["PlayerRespTime"]
 
 func _ready():
-	get_node("PlayerNetworkController/1").name=str(get_tree().get_network_unique_id())
-	
 	Events.connect("resp",self,"resp")
 
 #Slots
@@ -25,7 +23,7 @@ func RespTimeOut():
 	RespawnTimeOut=true
 
 func resp():
-	if RespawnTimeOut:
+	if RespawnTimeOut and CanRespawn:
 		DeadHero.position=SpawnPoints[randi()%SpawnPoints.size()]
 		DeadHero._ready()
 		$DeadTimer.stop()
@@ -37,4 +35,4 @@ remotesync func spawn_player(name:int):
 	node.set_network_master(name)
 	
 	node.name=str(name)
-	$PlayerNetworkController.add_child(node)
+	get_node(PlayerControllNode).add_child(node)

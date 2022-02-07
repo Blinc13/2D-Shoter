@@ -63,6 +63,7 @@ func _process(delta:float):
 	if Input.is_action_pressed("Fire") and weapon.reloaded:
 		weapon.fire(firePos,position+firePos*10)
 		emit_signal("Fire","fire",firePos,position+firePos*10)
+		print(position)
 	
 	if Input.is_action_pressed("Grenade") and weapon.altReloaded:
 		weapon.altFire(firePos,position+firePos*6)

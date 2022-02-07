@@ -24,6 +24,7 @@ rotation = 1.5708
 scale = Vector2( 0.7, 0.7 )
 
 [node name="m16" parent="Drawing/Weapons" instance=ExtResource( 3 )]
+visible = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Drawing"]
 scale = Vector2( 0.7, 0.7 )

@@ -8,6 +8,7 @@
 extents = Vector2( 3.5, 2.5 )
 
 [node name="LazerShell" type="RigidBody2D" groups=["Bullet"]]
+z_index = 1
 collision_layer = 2
 collision_mask = 2
 mass = 0.00102041

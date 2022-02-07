@@ -4,6 +4,7 @@
 [ext_resource path="res://Scripts/Objects/Effects/AngleEffect.gd" type="Script" id=2]
 
 [node name="Effect" type="Particles2D"]
+z_index = 1
 emitting = false
 amount = 40
 lifetime = 0.7

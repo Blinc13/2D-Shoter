@@ -2,8 +2,6 @@ extends Level
 
 class_name DeathMatch
 
-export(NodePath) var PlayersController="NetworkPlayerController"
-
 var lives_remain=GlobalVariables.gameSetUp["Game"]["PlayerLives"]
 
 func heroDead(hero):
@@ -14,7 +12,7 @@ func heroDead(hero):
 		rpc("DeadReg")
 
 remote func DeadReg():
-	var Players=get_node(PlayersController).GetAlivePlayers()
+	var Players=get_node(PlayerControllNode).GetAlivePlayers()
 	
 	if Players.size() == 2:
 		Events.emit_signal("game_end",Player[0])

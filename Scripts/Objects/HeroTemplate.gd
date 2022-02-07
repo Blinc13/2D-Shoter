@@ -35,4 +35,6 @@ func damage(dam):
 	pass
 
 func bulletCollide(body:Bullet):
+	if body == null:
+		return
 	body.queue_free()

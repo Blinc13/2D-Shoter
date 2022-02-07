@@ -18,6 +18,9 @@ func _init():
 
 remote func init(List:Dictionary):
 	print_debug("Init !: ",List)
+	
+	get_child(0).name=str(get_tree().get_network_unique_id())
+	
 	for i in List.keys():
 		if int(i) == get_tree().get_network_unique_id():
 			continue

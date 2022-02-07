@@ -6,6 +6,7 @@ func _ready():
 	$Settings/Game/ScrollArea/Widgets/RespTime/LineEdit.text=str(GlobalVariables.gameSetUp["Game"]["PlayerRespTime"])
 	$Settings/Game/ScrollArea/Widgets/PlayerSpeed/LineEdit.text=str(GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"])
 	$Settings/Game/ScrollArea/Widgets/PlayerMaxHealth/LineEdit.text=str(GlobalVariables.gameSetUp["Game"]["MaxPlayerHealth"])
+	$Settings/Game/ScrollArea/Widgets/PlayerLivesCount/LineEdit.text=str(GlobalVariables.gameSetUp["Game"]["PlayerLives"])
 	
 	$Settings/Server/ScrollArea/Widgets/Ip/LineEdit.text=str(GlobalVariables.gameSetUp["Server"]["Ip"])
 	$Settings/Server/ScrollArea/Widgets/MaxPlayers/LineEdit.text=str(GlobalVariables.gameSetUp["Server"]["MaxPlayers"])
@@ -47,6 +48,8 @@ func HealthEdit(MaxHealth:String):
 	GlobalVariables.gameSetUp["Game"]["MaxPlayerHealth"]=int(MaxHealth)
 func SpeedEdit(PlayerSpeed:String):
 	GlobalVariables.gameSetUp["Game"]["PlayerSpeedCof"]=float(PlayerSpeed)
+func LivesEdit(Count:String):
+	GlobalVariables.gameSetUp["Game"]["PlayerLives"]=int(Count)
 func RespTimeEdit(RespTime:String):
 	GlobalVariables.gameSetUp["Game"]["PlayerRespTime"]=float(RespTime)
 
@@ -70,3 +73,6 @@ func Pconnected(id:int):
 	$NetworkMenu/VBoxContainer/PlayersList.add_child(node)
 func Pdisconnect(id:int):
 	get_node("NetworkMenu/VBoxContainer/PlayersList/"+str(id)).queue_free()
+
+func Exit_network_menu():
+	$NetworkMenu.visible=false

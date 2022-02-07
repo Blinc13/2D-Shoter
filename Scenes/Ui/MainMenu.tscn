@@ -88,7 +88,7 @@ size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="LevelList/VBoxContainer/ScrollContainer"]
 margin_right = 299.0
-margin_bottom = 14.0
+margin_bottom = 32.0
 size_flags_horizontal = 3
 
 [node name="LevelItem" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
@@ -97,6 +97,10 @@ anchor_bottom = 0.0
 margin_right = 299.0
 margin_bottom = 34.0
 LevelName = "Beta level"
+
+[node name="LevelItem2" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+LevelName = "DeathmathLevel"
+ScenePath = "res://Scenes/Levels/Level_lol.tscn"
 
 [node name="StartButton" type="Button" parent="LevelList/VBoxContainer"]
 margin_top = 221.0
@@ -151,13 +155,19 @@ text = "Server"
 [node name="PlayersList" type="VBoxContainer" parent="NetworkMenu/VBoxContainer"]
 margin_top = 24.0
 margin_right = 299.0
-margin_bottom = 217.0
+margin_bottom = 193.0
 size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartGame" type="Button" parent="NetworkMenu/VBoxContainer"]
+[node name="ExitButton" type="Button" parent="NetworkMenu/VBoxContainer"]
+margin_top = 197.0
+margin_right = 299.0
+margin_bottom = 217.0
+text = "Exit"
+
+[node name="StartButton" type="Button" parent="NetworkMenu/VBoxContainer"]
 margin_top = 221.0
 margin_right = 299.0
 margin_bottom = 241.0
@@ -276,10 +286,33 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
 
-[node name="PlayerSpeed" type="HBoxContainer" parent="Settings/Game/ScrollArea/Widgets"]
+[node name="PlayerLivesCount" type="HBoxContainer" parent="Settings/Game/ScrollArea/Widgets"]
 margin_top = 28.0
 margin_right = 307.0
 margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Settings/Game/ScrollArea/Widgets/PlayerLivesCount"]
+margin_top = 5.0
+margin_right = 113.0
+margin_bottom = 19.0
+text = "Player lives count"
+
+[node name="HSeparator" type="HSeparator" parent="Settings/Game/ScrollArea/Widgets/PlayerLivesCount"]
+margin_left = 117.0
+margin_right = 245.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="Settings/Game/ScrollArea/Widgets/PlayerLivesCount"]
+margin_left = 249.0
+margin_right = 307.0
+margin_bottom = 24.0
+
+[node name="PlayerSpeed" type="HBoxContainer" parent="Settings/Game/ScrollArea/Widgets"]
+margin_top = 56.0
+margin_right = 307.0
+margin_bottom = 80.0
 
 [node name="Label" type="Label" parent="Settings/Game/ScrollArea/Widgets/PlayerSpeed"]
 margin_top = 5.0
@@ -299,9 +332,9 @@ margin_right = 307.0
 margin_bottom = 24.0
 
 [node name="RespTime" type="HBoxContainer" parent="Settings/Game/ScrollArea/Widgets"]
-margin_top = 56.0
+margin_top = 84.0
 margin_right = 307.0
-margin_bottom = 80.0
+margin_bottom = 108.0
 
 [node name="Label" type="Label" parent="Settings/Game/ScrollArea/Widgets/RespTime"]
 margin_top = 5.0
@@ -419,12 +452,15 @@ size_flags_stretch_ratio = 0.58
 [connection signal="pressed" from="ControllButtons/VBoxContainer/SettingsBtn" to="." method="_on_SettingsBtn_pressed"]
 [connection signal="pressed" from="ControllButtons/VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
 [connection signal="selected" from="LevelList/VBoxContainer/ScrollContainer/VBoxContainer/LevelItem" to="." method="LevelSelected"]
+[connection signal="selected" from="LevelList/VBoxContainer/ScrollContainer/VBoxContainer/LevelItem2" to="." method="LevelSelected"]
 [connection signal="pressed" from="LevelList/VBoxContainer/StartButton" to="." method="_on_Start_pressed"]
 [connection signal="pressed" from="NetworkMenu/VBoxContainer/control/Client" to="." method="Client_start"]
 [connection signal="pressed" from="NetworkMenu/VBoxContainer/control/Server" to="." method="Server_start"]
-[connection signal="pressed" from="NetworkMenu/VBoxContainer/StartGame" to="." method="start_game"]
+[connection signal="pressed" from="NetworkMenu/VBoxContainer/ExitButton" to="." method="Exit_network_menu"]
+[connection signal="pressed" from="NetworkMenu/VBoxContainer/StartButton" to="." method="start_game"]
 [connection signal="value_changed" from="Settings/Audio/VBoxContainer/VBoxContainer2/VBoxContainer/AudioVolume" to="." method="_on_AudioValume_value_changed"]
 [connection signal="text_changed" from="Settings/Game/ScrollArea/Widgets/PlayerMaxHealth/LineEdit" to="." method="HealthEdit"]
+[connection signal="text_changed" from="Settings/Game/ScrollArea/Widgets/PlayerLivesCount/LineEdit" to="." method="LivesEdit"]
 [connection signal="text_changed" from="Settings/Game/ScrollArea/Widgets/PlayerSpeed/LineEdit" to="." method="SpeedEdit"]
 [connection signal="text_changed" from="Settings/Game/ScrollArea/Widgets/RespTime/LineEdit" to="." method="RespTimeEdit"]
 [connection signal="text_changed" from="Settings/Server/ScrollArea/Widgets/Ip/LineEdit" to="." method="IpEdit"]
