@@ -177,8 +177,8 @@ Delay = 4.0
 "Max Units" = 4
 "Unit scene" = ExtResource( 13 )
 
-[connection signal="Dead" from="PlayerNetworkController/1" to="." method="_on_Hero_Dead"]
 [connection signal="Dead" from="PlayerNetworkController/1" to="." method="heroDead"]
+[connection signal="Dead" from="PlayerNetworkController/1" to="." method="_on_Hero_Dead"]
 [connection signal="Dead" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerDead"]
 [connection signal="Fire" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerFire"]
 [connection signal="HeroInit" from="PlayerNetworkController/1" to="PlayerNetworkController" method="PlayerSpawn"]

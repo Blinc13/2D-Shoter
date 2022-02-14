@@ -15,9 +15,8 @@ func _ready():
 
 #Slots
 func _on_Hero_Dead(hero):
-	if CanRespawn:
-		DeadHero=hero
-		$DeadTimer.start(RespTime)
+	DeadHero=hero
+	$DeadTimer.start(RespTime)
 
 func RespTimeOut():
 	RespawnTimeOut=true
@@ -36,3 +35,7 @@ remotesync func spawn_player(name:int):
 	
 	node.name=str(name)
 	get_node(PlayerControllNode).add_child(node)
+
+func _exit_tree():
+	for i in get_children():
+		i.free()
