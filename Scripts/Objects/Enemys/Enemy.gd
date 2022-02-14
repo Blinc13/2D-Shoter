@@ -73,17 +73,27 @@ func _on_AnimatedSprite_animation_finished():
 	if attacking and !death:
 		attacking=false
 		AnimationObj.play("run")
+		set_process(true)
+		
 		if global_position.distance_to(target.position)<=attack_radius:
 			target.damage(damag)
-		set_process(true)
+			if target.health<1:
+				print("Defeat!")
+				TargetDead()
 
 func TriggerAct(node:Node2D):
-	if node.is_in_group("Hero"):
+	if node.is_in_group("Hero") && node.health>0:
 		target=node
 		$Trigger.set_deferred("monitoring",false)
 		AnimationObj.playing=true
 		init()
 		set_process(true)
+
+func TargetDead():
+	$Trigger.set_deferred("monitoring",true)
+	AnimationObj.playing=false
+	death()
+	set_process(false)
 
 func init():
 	pass

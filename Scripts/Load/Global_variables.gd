@@ -12,7 +12,8 @@ var gameSetUp={
 	{
 		"MaxPlayerHealth":100,
 		"PlayerSpeedCof":1,
-		"PlayerRespTime":10
+		"PlayerRespTime":10,
+		"PlayerLives":5
 	},
 	"Server":
 	{

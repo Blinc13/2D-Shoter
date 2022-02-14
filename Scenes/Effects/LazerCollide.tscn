@@ -4,6 +4,7 @@
 [ext_resource path="res://Resources/Effects/LazzerCollideParticles.tres" type="Material" id=2]
 
 [node name="Effect" type="Particles2D"]
+z_index = 1
 emitting = false
 one_shot = true
 explosiveness = 1.0

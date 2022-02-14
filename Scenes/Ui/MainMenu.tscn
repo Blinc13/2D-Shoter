@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scripts/Load/MainMenu.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Ui/LevelItem.tscn" type="PackedScene" id=2]
 
 [node name="Control" type="Control"]
 anchor_right = 1.0
@@ -14,6 +15,186 @@ __meta__ = {
 "_edit_group_": true,
 "_edit_use_anchors_": false
 }
+
+[node name="ControllButtons" type="MarginContainer" parent="."]
+anchor_right = 0.198
+anchor_bottom = 0.057
+margin_right = 0.248001
+margin_bottom = 34.8
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControllButtons"]
+margin_right = 203.0
+margin_bottom = 69.0
+rect_min_size = Vector2( 203, 68 )
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayBtn" type="Button" parent="ControllButtons/VBoxContainer"]
+margin_right = 203.0
+margin_bottom = 20.0
+focus_neighbour_top = NodePath("../ExitBtn")
+focus_neighbour_bottom = NodePath("../SettingsBtn")
+text = "Play"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SettingsBtn" type="Button" parent="ControllButtons/VBoxContainer"]
+margin_top = 24.0
+margin_right = 203.0
+margin_bottom = 44.0
+focus_neighbour_top = NodePath("../PlayBtn")
+focus_neighbour_bottom = NodePath("../ExitBtn")
+text = "Settings"
+
+[node name="ExitBtn" type="Button" parent="ControllButtons/VBoxContainer"]
+margin_top = 48.0
+margin_right = 203.0
+margin_bottom = 68.0
+focus_neighbour_top = NodePath("../SettingsBtn")
+focus_neighbour_bottom = NodePath("../PlayBtn")
+text = "Exit"
+
+[node name="LevelList" type="PanelContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -156.5
+margin_top = -127.5
+margin_right = 156.5
+margin_bottom = 127.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelList"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 306.0
+margin_bottom = 248.0
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LevelList/VBoxContainer"]
+margin_right = 299.0
+margin_bottom = 217.0
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelList/VBoxContainer/ScrollContainer"]
+margin_right = 299.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="LevelItem" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 299.0
+margin_bottom = 34.0
+LevelName = "Beta level"
+
+[node name="LevelItem2" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 38.0
+margin_right = 299.0
+margin_bottom = 72.0
+LevelName = "Level lol"
+ScenePath = "res://Scenes/Levels/Level_lol.tscn"
+
+[node name="LevelItem3" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 76.0
+margin_right = 299.0
+margin_bottom = 110.0
+LevelName = "DeathTime"
+ScenePath = "res://Scenes/Levels/DeathTime.tscn"
+
+[node name="LevelItem4" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 114.0
+margin_right = 299.0
+margin_bottom = 148.0
+LevelName = "Roundhole"
+ScenePath = "res://Scenes/Levels/Roundhole.tscn"
+
+[node name="StartButton" type="Button" parent="LevelList/VBoxContainer"]
+margin_top = 221.0
+margin_right = 299.0
+margin_bottom = 241.0
+text = "Start"
+
+[node name="NetworkMenu" type="PanelContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -156.5
+margin_top = -127.5
+margin_right = 156.5
+margin_bottom = 127.5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NetworkMenu"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 306.0
+margin_bottom = 248.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="control" type="HBoxContainer" parent="NetworkMenu/VBoxContainer"]
+margin_right = 299.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Client" type="Button" parent="NetworkMenu/VBoxContainer/control"]
+margin_right = 49.0
+margin_bottom = 20.0
+text = "Client"
+
+[node name="HSeparator" type="HSeparator" parent="NetworkMenu/VBoxContainer/control"]
+margin_left = 53.0
+margin_right = 243.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Server" type="Button" parent="NetworkMenu/VBoxContainer/control"]
+margin_left = 247.0
+margin_right = 299.0
+margin_bottom = 20.0
+text = "Server"
+
+[node name="PlayersList" type="VBoxContainer" parent="NetworkMenu/VBoxContainer"]
+margin_top = 24.0
+margin_right = 299.0
+margin_bottom = 193.0
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ExitButton" type="Button" parent="NetworkMenu/VBoxContainer"]
+margin_top = 197.0
+margin_right = 299.0
+margin_bottom = 217.0
+text = "Exit"
+
+[node name="StartButton" type="Button" parent="NetworkMenu/VBoxContainer"]
+margin_top = 221.0
+margin_right = 299.0
+margin_bottom = 241.0
+text = "Start"
 
 [node name="Settings" type="TabContainer" parent="."]
 visible = false
@@ -128,10 +309,33 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.0
 
-[node name="PlayerSpeed" type="HBoxContainer" parent="Settings/Game/ScrollArea/Widgets"]
+[node name="PlayerLivesCount" type="HBoxContainer" parent="Settings/Game/ScrollArea/Widgets"]
 margin_top = 28.0
 margin_right = 307.0
 margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Settings/Game/ScrollArea/Widgets/PlayerLivesCount"]
+margin_top = 5.0
+margin_right = 113.0
+margin_bottom = 19.0
+text = "Player lives count"
+
+[node name="HSeparator" type="HSeparator" parent="Settings/Game/ScrollArea/Widgets/PlayerLivesCount"]
+margin_left = 117.0
+margin_right = 245.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="LineEdit" type="LineEdit" parent="Settings/Game/ScrollArea/Widgets/PlayerLivesCount"]
+margin_left = 249.0
+margin_right = 307.0
+margin_bottom = 24.0
+
+[node name="PlayerSpeed" type="HBoxContainer" parent="Settings/Game/ScrollArea/Widgets"]
+margin_top = 56.0
+margin_right = 307.0
+margin_bottom = 80.0
 
 [node name="Label" type="Label" parent="Settings/Game/ScrollArea/Widgets/PlayerSpeed"]
 margin_top = 5.0
@@ -151,9 +355,9 @@ margin_right = 307.0
 margin_bottom = 24.0
 
 [node name="RespTime" type="HBoxContainer" parent="Settings/Game/ScrollArea/Widgets"]
-margin_top = 56.0
+margin_top = 84.0
 margin_right = 307.0
-margin_bottom = 80.0
+margin_bottom = 108.0
 
 [node name="Label" type="Label" parent="Settings/Game/ScrollArea/Widgets/RespTime"]
 margin_top = 5.0
@@ -267,179 +471,22 @@ margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.58
 
-[node name="ControllButtonst" type="MarginContainer" parent="."]
-anchor_right = 0.198
-anchor_bottom = 0.057
-margin_right = 0.248001
-margin_bottom = 34.8
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ControllButtonst"]
-margin_right = 203.0
-margin_bottom = 69.0
-rect_min_size = Vector2( 203, 68 )
-alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="PlayBtn" type="Button" parent="ControllButtonst/VBoxContainer"]
-margin_right = 203.0
-margin_bottom = 20.0
-focus_neighbour_top = NodePath("../ExitBtn")
-focus_neighbour_bottom = NodePath("../SettingsBtn")
-text = "Play"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="SettingsBtn" type="Button" parent="ControllButtonst/VBoxContainer"]
-margin_top = 24.0
-margin_right = 203.0
-margin_bottom = 44.0
-focus_neighbour_top = NodePath("../PlayBtn")
-focus_neighbour_bottom = NodePath("../ExitBtn")
-text = "Settings"
-
-[node name="ExitBtn" type="Button" parent="ControllButtonst/VBoxContainer"]
-margin_top = 48.0
-margin_right = 203.0
-margin_bottom = 68.0
-focus_neighbour_top = NodePath("../SettingsBtn")
-focus_neighbour_bottom = NodePath("../PlayBtn")
-text = "Exit"
-
-[node name="NetworkMenu" type="PanelContainer" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -156.5
-margin_top = -127.5
-margin_right = 156.5
-margin_bottom = 127.5
-
-[node name="VBoxContainer" type="VBoxContainer" parent="NetworkMenu"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 306.0
-margin_bottom = 248.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="control" type="HBoxContainer" parent="NetworkMenu/VBoxContainer"]
-margin_right = 299.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="Client" type="Button" parent="NetworkMenu/VBoxContainer/control"]
-margin_right = 49.0
-margin_bottom = 20.0
-text = "Client"
-
-[node name="HSeparator" type="HSeparator" parent="NetworkMenu/VBoxContainer/control"]
-margin_left = 53.0
-margin_right = 243.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="Server" type="Button" parent="NetworkMenu/VBoxContainer/control"]
-margin_left = 247.0
-margin_right = 299.0
-margin_bottom = 20.0
-text = "Server"
-
-[node name="PlayersList" type="VBoxContainer" parent="NetworkMenu/VBoxContainer"]
-margin_top = 24.0
-margin_right = 299.0
-margin_bottom = 217.0
-size_flags_vertical = 3
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StartGame" type="Button" parent="NetworkMenu/VBoxContainer"]
-margin_top = 221.0
-margin_right = 299.0
-margin_bottom = 241.0
-text = "Start"
-
-[node name="LevelList" type="PanelContainer" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -156.5
-margin_top = -127.5
-margin_right = 156.5
-margin_bottom = 127.5
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelList"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 306.0
-margin_bottom = 248.0
-size_flags_vertical = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="LevelList/VBoxContainer"]
-margin_right = 299.0
-margin_bottom = 217.0
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="LevelList/VBoxContainer/ScrollContainer"]
-margin_right = 299.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_right = 299.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_top = 3.0
-margin_right = 64.0
-margin_bottom = 17.0
-text = "Beta level"
-
-[node name="HSeparator" type="HSeparator" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 68.0
-margin_right = 244.0
-margin_bottom = 20.0
-size_flags_horizontal = 3
-
-[node name="Button" type="Button" parent="LevelList/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
-margin_left = 248.0
-margin_right = 299.0
-margin_bottom = 20.0
-text = "Select"
-
-[node name="StartButton" type="Button" parent="LevelList/VBoxContainer"]
-margin_top = 221.0
-margin_right = 299.0
-margin_bottom = 241.0
-text = "Start"
-
+[connection signal="pressed" from="ControllButtons/VBoxContainer/PlayBtn" to="." method="_on_Play_pressed"]
+[connection signal="pressed" from="ControllButtons/VBoxContainer/SettingsBtn" to="." method="_on_SettingsBtn_pressed"]
+[connection signal="pressed" from="ControllButtons/VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
+[connection signal="selected" from="LevelList/VBoxContainer/ScrollContainer/VBoxContainer/LevelItem" to="." method="LevelSelected"]
+[connection signal="selected" from="LevelList/VBoxContainer/ScrollContainer/VBoxContainer/LevelItem2" to="." method="LevelSelected"]
+[connection signal="selected" from="LevelList/VBoxContainer/ScrollContainer/VBoxContainer/LevelItem3" to="." method="LevelSelected"]
+[connection signal="pressed" from="LevelList/VBoxContainer/StartButton" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="NetworkMenu/VBoxContainer/control/Client" to="." method="Client_start"]
+[connection signal="pressed" from="NetworkMenu/VBoxContainer/control/Server" to="." method="Server_start"]
+[connection signal="pressed" from="NetworkMenu/VBoxContainer/ExitButton" to="." method="Exit_network_menu"]
+[connection signal="pressed" from="NetworkMenu/VBoxContainer/StartButton" to="." method="start_game"]
 [connection signal="value_changed" from="Settings/Audio/VBoxContainer/VBoxContainer2/VBoxContainer/AudioVolume" to="." method="_on_AudioValume_value_changed"]
 [connection signal="text_changed" from="Settings/Game/ScrollArea/Widgets/PlayerMaxHealth/LineEdit" to="." method="HealthEdit"]
+[connection signal="text_changed" from="Settings/Game/ScrollArea/Widgets/PlayerLivesCount/LineEdit" to="." method="LivesEdit"]
 [connection signal="text_changed" from="Settings/Game/ScrollArea/Widgets/PlayerSpeed/LineEdit" to="." method="SpeedEdit"]
 [connection signal="text_changed" from="Settings/Game/ScrollArea/Widgets/RespTime/LineEdit" to="." method="RespTimeEdit"]
 [connection signal="text_changed" from="Settings/Server/ScrollArea/Widgets/Ip/LineEdit" to="." method="IpEdit"]
 [connection signal="text_changed" from="Settings/Server/ScrollArea/Widgets/MaxPlayers/LineEdit" to="." method="MaxPlayersEdit"]
 [connection signal="text_changed" from="Settings/Server/ScrollArea/Widgets/Port/LineEdit" to="." method="PortEdit"]
-[connection signal="pressed" from="ControllButtonst/VBoxContainer/PlayBtn" to="." method="_on_PlayBtn_pressed"]
-[connection signal="pressed" from="ControllButtonst/VBoxContainer/SettingsBtn" to="." method="_on_SettingsBtn_pressed"]
-[connection signal="pressed" from="ControllButtonst/VBoxContainer/ExitBtn" to="." method="_on_ExitBtn_pressed"]
-[connection signal="pressed" from="NetworkMenu/VBoxContainer/control/Client" to="." method="Client_start"]
-[connection signal="pressed" from="NetworkMenu/VBoxContainer/control/Server" to="." method="Server_start"]
-[connection signal="pressed" from="NetworkMenu/VBoxContainer/StartGame" to="." method="start_game"]

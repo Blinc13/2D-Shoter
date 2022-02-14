@@ -10,7 +10,7 @@ extents = Vector2( 8, 8 )
 extents = Vector2( 8, 8 )
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 99.4636
+radius = 229.0
 
 [node name="Spider" type="KinematicBody2D" groups=["Entity"]]
 collision_mask = 0

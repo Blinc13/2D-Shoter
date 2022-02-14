@@ -19,6 +19,7 @@ particles_anim_loop = false
 extents = Vector2( 25, 26.5 )
 
 [node name="Rocket" type="RigidBody2D"]
+z_index = 1
 collision_layer = 3
 contacts_reported = 1
 contact_monitor = true

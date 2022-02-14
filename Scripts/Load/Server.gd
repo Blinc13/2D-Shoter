@@ -7,6 +7,8 @@ var Net:NetworkedMultiplayerENet
 
 var isServer:bool=false
 
+var Map:String="res://Scenes/Levels/BetaLevel.tscn"
+
 signal Connected(id)
 signal Disconnected(id)
 
@@ -57,8 +59,8 @@ remotesync func send_signal(name,arg):
 	print("rpc signal")
 	emit_signal(name,arg)
 
-remotesync func start():
-	get_node("/root").add_child(load("res://Scenes/Levels/BetaLevel.tscn").instance())
+remotesync func start(map:String):
+	get_node("/root").add_child(load(map).instance())
 	get_node("/root/Control").visible=false
 remotesync func end():
 	get_node("/root/Level").queue_free()
@@ -66,14 +68,15 @@ remotesync func end():
 
 func start_game():
 	get_tree().set_refuse_new_network_connections(true)
-	rpc("start")
+	rpc("start",Map)
 	
 	for i in get_tree().get_network_connected_peers():
 		get_node("/root/Level").spawn_player(i)
 	
-	var net=get_node("/root/Level/PlayerNetworkController")
+	var net=get_node_or_null("/root/Level/PlayerNetworkController")
 	
-	net.rpc("init",net.GetPlayersList())
+	if net != null:
+		net.rpc("init",net.GetPlayersList())
 
 func end_game():
 	get_tree().set_refuse_new_network_connections(false)

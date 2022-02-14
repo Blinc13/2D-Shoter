@@ -3,7 +3,7 @@
 [ext_resource path="res://Resources/Sprites/HeroSprite/Res/HeroAnimation.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Scripts/Objects/Hero.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Weapons/Guns/m16.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Another/GameUi.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Ui/GameUi.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 5.9551, 7.86408 )
@@ -24,6 +24,7 @@ rotation = 1.5708
 scale = Vector2( 0.7, 0.7 )
 
 [node name="m16" parent="Drawing/Weapons" instance=ExtResource( 3 )]
+visible = true
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Drawing"]
 scale = Vector2( 0.7, 0.7 )

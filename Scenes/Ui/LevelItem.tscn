@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Objects/LevelItem.gd" type="Script" id=1]
+
+[node name="LevelItem" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1017.0
+margin_bottom = 593.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+margin_top = 286.0
+margin_right = 176.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.27
+text = "Level Name"
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer"]
+margin_left = 180.0
+margin_right = 835.0
+margin_bottom = 586.0
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+margin_left = 839.0
+margin_right = 1010.0
+margin_bottom = 586.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.26
+text = "Select"
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_Button_pressed"]
